@@ -1,8 +1,45 @@
-# React + Vite
+# 📝 My Todo List 만들기
+- React 주특기 1주차 개인 과제
+- 정은화
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 과제 개요
+### 목표
+- UI 구현하기
+- Todo 추가 하기
+- Todo 삭제 하기
+- Todo 완료 상태 변경하기
 
-Currently, two official plugins are available:
+### 과제 조건
+1. 디자인은 취향대로 해도 되나 화면 구성은 동일하게 해주세요.
+2. Todo의 isDone 상태가 true이면, 상태 버튼의 라벨을 취소, isDone이 false 이면 라벨을 완료 로 조건부 렌더링 해주세요.
+3. Todo의 상태가 Working 이면 위쪽에 위치하고, Done이면 아래쪽에 위치하도록 구현합니다.
+4. Layout의 최대 넓이는 1200px, 최소 넓이는 800px로 제한하고, 전체 화면의 가운데로 정렬해주세요.
+5. 컴포넌트 구조는 자유롭게 구현해보세요. 반복되는 컴포넌트를 찾아서, 직접 컴포넌트를 분리해보시고, 분리한 컴포넌트를 `README`에 작성합니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✍️ 답변
+### 분리한 컴포넌트
+- Layout.jsx
+- Input.jsx
+- Button.jsx
+- Card.jsx
+
+### 질문에 대한 답변
+#### 1. JSX 문법이란 무엇일까요?
+- JavaScript와 XML로 이루어진 JavaScript를 확장한 문법이다.
+- JavaScript의 모든 기능이 포함되어 있으며, React Element를 생성하기 위한 문법이다.
+- JSX 문법을 사용하여 React 요소를 만들고 DOM에 렌더링할 수 있다.
+
+#### 2. 사용자가 입력하는 값, 또는 이미 입력된 값, 투두의 타이틀과 같은 애플리케이션의 상태를 관리하기 위해 리액트의 어떤 기능을 사용하셨나요?
+- useState 훅을 사용하여 상태를 관리 했다.
+
+#### 3. 애플리케이션의 상태 값들을 컴포넌트 간 어떤 방식으로 공유하셨나요?
+- 자식 컴포넌트로 props를 내려보냈다.
+
+#### 4. 기능 구현을 위해 불변성 유지가 필요한 부분이 있었다면 하나만 설명해 주세요.
+- 리액트는 state가 변경되어야 리렌더링이 일어난다. 투두를 추가하고, 업데이트 하는 과정에서 참조형 데이터가 불변성을 지킬 수 있도록 작업해야 한다.
+- 투두 카드의 `완료` 버튼을 클릭하면 `isDone` 속성을 현재의 값과 반대 값으로 바꾸어 working 영역에서 Done 영역으로 투두 카드를 이동 시켜야 한다.
+- 해당하는 todo의 isDone 프로퍼티의 값을 변경하기 위해서, 전개 연산자를 사용하여 기존 todo를 복사해 새로운 todo 객체를 만들고, isDone 속성을 변경하면 불변성을 유지하면서 todoList의 state를 변경할 수 있다.
+
+#### 5. 반복되는 컴포넌트를 파악하고 재사용할 수 있는 컴포넌트로 분리해 보셨나요? 그렇다면 어떠한 이점이 있었나요?
+- 컴포넌트 단위로 분리되어 있으니 가독성이 좋아졌다.
+- 재사용이 가능해 코드 작성 시 효율적이다.
