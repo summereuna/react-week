@@ -1,6 +1,7 @@
 # 📝 My Todo List 만들기
 - React 주특기 1주차 개인 과제
 - 정은화
+- [배포한 사이트: vercel](https://react-todo-list-five-tau.vercel.app/)
 
 ## 📌 과제 개요
 ### 목표
