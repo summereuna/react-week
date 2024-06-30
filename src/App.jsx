@@ -32,6 +32,11 @@ function App() {
   ]);
 
   const onAddTodoClick = () => {
+    //제목, 내용 있는지 검증
+    if (!title.length > 0 || !content.length > 0) {
+      return alert("제목과 내용을 모두 입력해 주세요!");
+    }
+
     //id 중복 방지
     const newId =
       todoList.length > 0
