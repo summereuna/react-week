@@ -11,7 +11,7 @@ export default function CardsContainer({
   return (
     <div>
       <h2 className="cards-title">{cardsTitle}</h2>
-      <div className={`cards ${isDone ? null : "cards--done"}`}>
+      <div className={`cards ${isDone ? "cards--done" : null}`}>
         {todoList
           .filter((todo) => (isDone ? todo.isDone : !todo.isDone))
           .map((todo) => (
