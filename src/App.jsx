@@ -3,7 +3,7 @@ import { useState } from "react";
 import Layout from "@components/Layout";
 import Input from "@components/Input";
 import Button from "@components/Button";
-import Card from "@components/Card";
+import CardsContainer from "@components/CardsContainer";
 
 function App() {
   const [title, setTitle] = useState("");
@@ -32,6 +32,11 @@ function App() {
   ]);
 
   const onAddTodoClick = () => {
+    //제목, 내용 있는지 검증
+    if (!title.length > 0 || !content.length > 0) {
+      return alert("제목과 내용을 모두 입력해 주세요!");
+    }
+
     //id 중복 방지
     const newId =
       todoList.length > 0
@@ -81,51 +86,21 @@ function App() {
       {/* output 영역 */}
       <div className="output-container">
         {/* Working 영역 */}
-        <div>
-          <h2 className="cards-title">🔥 Working</h2>
-          <div className="cards">
-            {todoList
-              .filter((todo) => !todo.isDone)
-              .map((todo) => (
-                <Card
-                  key={todo.id}
-                  id={todo.id}
-                  title={todo.title}
-                  content={todo.content}
-                  isDone={todo.isDone}
-                  onDeleteTodoClick={() => {
-                    onDeleteTodoClick(todo.id);
-                  }}
-                  onDoneClick={() => {
-                    onDoneClick(todo.id);
-                  }}
-                />
-              ))}
-          </div>
-        </div>
+        <CardsContainer
+          todoList={todoList}
+          isDone={false}
+          cardsTitle="🔥 Working"
+          onDeleteTodoClick={onDeleteTodoClick}
+          onDoneClick={onDoneClick}
+        />
         {/* Done 영역 */}
-        <div>
-          <h2 className="cards-title">✅ Done</h2>
-          <div className="cards cards--done">
-            {todoList
-              .filter((todo) => todo.isDone)
-              .map((todo) => (
-                <Card
-                  key={todo.id}
-                  id={todo.id}
-                  title={todo.title}
-                  content={todo.content}
-                  isDone={todo.isDone}
-                  onDeleteTodoClick={() => {
-                    onDeleteTodoClick(todo.id);
-                  }}
-                  onDoneClick={() => {
-                    onDoneClick(todo.id);
-                  }}
-                />
-              ))}
-          </div>
-        </div>
+        <CardsContainer
+          todoList={todoList}
+          isDone={true}
+          cardsTitle="✅ Done"
+          onDeleteTodoClick={onDeleteTodoClick}
+          onDoneClick={onDoneClick}
+        />
       </div>
     </Layout>
   );
