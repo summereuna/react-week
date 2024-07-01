@@ -1,9 +1,34 @@
-import "@/App.css";
+import styled from "styled-components";
+import GlobalStyle from "@/GlobalStyle.jsx";
 import { useState } from "react";
 import Layout from "@components/Layout";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import CardsContainer from "@components/CardsContainer";
+
+const StInputContainer = styled.section`
+  padding: 1rem;
+  margin: 1rem;
+  background-color: white;
+  border: 1px solid rgb(62, 149, 255);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const StInputs = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const StOutputContainer = styled.section`
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 function App() {
   const [title, setTitle] = useState("");
@@ -62,47 +87,50 @@ function App() {
   };
 
   return (
-    <Layout>
-      {/* input 영역 */}
-      <div className="input-container">
-        <div className="inputs">
-          <Input
-            onChange={changeTitle}
-            value={title}
-            label="제목"
-            htmlFor="todo-title"
+    <>
+      <GlobalStyle />
+      <Layout>
+        {/* input 영역 */}
+        <StInputContainer>
+          <StInputs>
+            <Input
+              onChange={changeTitle}
+              value={title}
+              label="제목"
+              htmlFor="todo-title"
+            />
+            <Input
+              onChange={changeContent}
+              value={content}
+              label="내용"
+              htmlFor="todo-content"
+            />
+          </StInputs>
+          <Button onClick={onAddTodoClick} type="btn-add">
+            추가
+          </Button>
+        </StInputContainer>
+        {/* output 영역 */}
+        <StOutputContainer>
+          {/* Working 영역 */}
+          <CardsContainer
+            todoList={todoList}
+            isDone={false}
+            cardsTitle="🔥 Working"
+            onDeleteTodoClick={onDeleteTodoClick}
+            onDoneClick={onDoneClick}
           />
-          <Input
-            onChange={changeContent}
-            value={content}
-            label="내용"
-            htmlFor="todo-content"
+          {/* Done 영역 */}
+          <CardsContainer
+            todoList={todoList}
+            isDone={true}
+            cardsTitle="✅ Done"
+            onDeleteTodoClick={onDeleteTodoClick}
+            onDoneClick={onDoneClick}
           />
-        </div>
-        <Button onClick={onAddTodoClick} type="btn-add">
-          추가
-        </Button>
-      </div>
-      {/* output 영역 */}
-      <div className="output-container">
-        {/* Working 영역 */}
-        <CardsContainer
-          todoList={todoList}
-          isDone={false}
-          cardsTitle="🔥 Working"
-          onDeleteTodoClick={onDeleteTodoClick}
-          onDoneClick={onDoneClick}
-        />
-        {/* Done 영역 */}
-        <CardsContainer
-          todoList={todoList}
-          isDone={true}
-          cardsTitle="✅ Done"
-          onDeleteTodoClick={onDeleteTodoClick}
-          onDoneClick={onDoneClick}
-        />
-      </div>
-    </Layout>
+        </StOutputContainer>
+      </Layout>
+    </>
   );
 }
 
