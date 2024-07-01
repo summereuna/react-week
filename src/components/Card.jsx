@@ -1,4 +1,31 @@
 import styled from "styled-components";
+import Button from "@components/Button";
+
+export default function Card({
+  id,
+  title,
+  content,
+  isDone,
+  onDeleteTodoClick,
+  onDoneClick,
+}) {
+  return (
+    <StCard id={id} type={`${isDone ? "card--done" : null}`}>
+      <StCardContent>
+        <StTodoTitle>{title}</StTodoTitle>
+        <StTodoContent>{content}</StTodoContent>
+      </StCardContent>
+      <StCardButtons>
+        <Button onClick={onDeleteTodoClick} type="btn-delete">
+          삭제
+        </Button>
+        <Button onClick={onDoneClick} type={isDone ? "btn-add" : "btn-done"}>
+          {isDone ? "취소" : "완료"}
+        </Button>
+      </StCardButtons>
+    </StCard>
+  );
+}
 
 const StCard = styled.div`
   background-color: white;
@@ -57,31 +84,3 @@ const StCardButtons = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
-
-import Button from "@components/Button";
-
-export default function Card({
-  id,
-  title,
-  content,
-  isDone,
-  onDeleteTodoClick,
-  onDoneClick,
-}) {
-  return (
-    <StCard id={id} type={`${isDone ? "card--done" : null}`}>
-      <StCardContent>
-        <StTodoTitle>{title}</StTodoTitle>
-        <StTodoContent>{content}</StTodoContent>
-      </StCardContent>
-      <StCardButtons>
-        <Button onClick={onDeleteTodoClick} type="btn-delete">
-          삭제
-        </Button>
-        <Button onClick={onDoneClick} type={isDone ? "btn-add" : "btn-done"}>
-          {isDone ? "취소" : "완료"}
-        </Button>
-      </StCardButtons>
-    </StCard>
-  );
-}

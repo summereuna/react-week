@@ -1,4 +1,17 @@
 import styled from "styled-components";
+
+export default function Layout({ children }) {
+  return (
+    <StLayout>
+      <StHeader>
+        <span>My Todo List</span>
+        <span>React</span>
+      </StHeader>
+      <StMain>{children}</StMain>
+    </StLayout>
+  );
+}
+
 const StLayout = styled.div`
   max-width: 1200px;
   min-width: 800px;
@@ -16,15 +29,3 @@ const StHeader = styled.header`
 const StMain = styled.main`
   padding: 1rem 0;
 `;
-
-export default function Layout({ children }) {
-  return (
-    <StLayout>
-      <StHeader>
-        <span>My Todo List</span>
-        <span>React</span>
-      </StHeader>
-      <StMain>{children}</StMain>
-    </StLayout>
-  );
-}

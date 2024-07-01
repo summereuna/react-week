@@ -1,6 +1,15 @@
 import styled from "styled-components";
 
+export default function Button({ onClick, children, type }) {
+  return (
+    <StBtn type={type} onClick={onClick}>
+      {children}
+    </StBtn>
+  );
+}
+
 const StBtn = styled.button`
+  height: 2.5rem;
   border-radius: 8px;
   border: 1.2px solid transparent;
   min-width: 5rem;
@@ -33,11 +42,3 @@ const StBtn = styled.button`
     }}
   }
 `;
-
-export default function Button({ onClick, children, type }) {
-  return (
-    <StBtn type={type} onClick={onClick}>
-      {children}
-    </StBtn>
-  );
-}

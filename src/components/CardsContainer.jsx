@@ -1,36 +1,22 @@
 import styled from "styled-components";
-
-const StCardsTitle = styled.h2`
-  padding: 1rem;
-  font-size: x-large;
-  font-weight: 500;
-`;
-
-const StCards = styled.div`
-  padding: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  min-height: 178px;
-  background-color: ${(props) => {
-    switch (props.type) {
-      case "cards--done":
-        return `rgb(243, 255, 241);`;
-      default:
-        return `rgb(241, 247, 255);`;
-    }
-  }};
-`;
-
 import Card from "@components/Card";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTodo, updateTodo } from "@/redux/modules/todos";
 
-export default function CardsContainer({
-  todoList,
-  isDone,
-  cardsTitle,
-  onDeleteTodoClick,
-  onDoneClick,
-}) {
+export default function CardsContainer({ cardsTitle, isDone }) {
+  const { todoList } = useSelector((state) => {
+    return state.todos;
+  });
+
+  const dispatch = useDispatch();
+
+  const onDeleteTodoClick = (id) => {
+    dispatch(deleteTodo(id));
+  };
+
+  const onDoneClick = (id) => {
+    dispatch(updateTodo(id));
+  };
   return (
     <div>
       <StCardsTitle>{cardsTitle}</StCardsTitle>
@@ -56,3 +42,25 @@ export default function CardsContainer({
     </div>
   );
 }
+
+const StCardsTitle = styled.h2`
+  padding: 1rem;
+  font-size: x-large;
+  font-weight: 500;
+`;
+
+const StCards = styled.div`
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  min-height: 178px;
+  background-color: ${(props) => {
+    switch (props.type) {
+      case "cards--done":
+        return `rgb(243, 255, 241);`;
+      default:
+        return `rgb(241, 247, 255);`;
+    }
+  }};
+`;

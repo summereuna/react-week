@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export default function Input({ onChange, value, label, name }) {
+  return (
+    <StInputInfo>
+      <label htmlFor={name}>{label}</label>
+      <StInput value={value} onChange={onChange} name={name} type="text" />
+    </StInputInfo>
+  );
+}
+
 const StInputInfo = styled.div`
   align-items: center;
   font-weight: 700;
@@ -22,18 +31,3 @@ const StInput = styled.input`
     background-color: rgb(164, 205, 255);
   }
 `;
-
-export default function Input({ onChange, value, label, htmlFor }) {
-  return (
-    <StInputInfo>
-      <label htmlFor={htmlFor}>{label}</label>
-      <StInput
-        value={value}
-        onChange={onChange}
-        name={htmlFor}
-        type="text"
-        required
-      />
-    </StInputInfo>
-  );
-}
