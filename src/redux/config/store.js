@@ -1,7 +1,7 @@
-import { createStore } from "redux";
-import { combineReducers } from "redux";
+import { combineReducers, createStore } from "redux";
 import todos from "../modules/todos";
 
+// store 설정
 const rootReducer = combineReducers({
   todos,
 });

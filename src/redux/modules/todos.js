@@ -1,6 +1,7 @@
-export const ADD_TODO = "/todo/ADD_TODO";
-export const DELETE_TODO = "/todo/DELETE_TODO";
-export const UPDATE_TODO = "/todo/UPDATE_TODO";
+// 액션 정의 생성 삭제 수정
+const ADD_TODO = "/todos/ADD_TODO";
+const DELETE_TODO = "/todos/DELETE_TODO";
+const UPDATE_TODO = "/todos/UPDATE_TODO";
 
 export const addTodo = (payload) => {
   return {
@@ -8,6 +9,7 @@ export const addTodo = (payload) => {
     payload,
   };
 };
+
 export const deleteTodo = (id) => {
   return {
     type: DELETE_TODO,
