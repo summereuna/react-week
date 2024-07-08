@@ -1,4 +1,4 @@
-import GlobalStyle from "@/GlobalStyle.jsx";
+import GlobalStyle from "@/GlobalStyle";
 import Router from "@shared/Router";
 import { ThemeProvider } from "styled-components";
 import theme from "@shared/theme";

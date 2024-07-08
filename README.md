@@ -1,59 +1,51 @@
-# 📝 My Todo List 만들기
+# 📝 컴포넌트 구현하기
 
-- React 주특기 Lv2 페어 과제
-- 정은화, 김무성
-- VSCode Live Share 익스텐션으로 실시간 협업
-- [계획: notion](https://sturdy-dew-31f.notion.site/Lv-2-02e2c22f55994652bf30348393909b3f?pvs=4)
-- [배포한 사이트: vercel](https://lv-2.vercel.app)
+- React 주특기 주차 Lv.3 과제
+- 정은화
+- [배포한 사이트: vercel](https://lv3-lemon.vercel.app/)
 
 ## 📌 과제 개요
 
 ### 목표
-
-- react-router-dom, styled-components, redux를 사용해서 My Todo List 를 다시 만들어봅니다.
+- 컴포넌트 재사용성 높이기
+- 모달 구현하기
+- 드롭다운 모달로 구현하기
 
 ### 과제 조건
+#### 1. Modal
 
-1. 디자인과 화면 구성은 자유롭게 구현합니다.
-2. todos 데이터는 리덕스를 사용해서 전역으로 상태를 관리합니다.
-3. todos 모듈은 `Ducks 패턴`으로 구현합니다.
-4. Todo의 상태에 **“완료” 그룹과 “진행중" 그룹**을 나뉘어서 보이도록 구현합니다. 예시 영상 꼭 위, 아래가 아니어도 되며 창의적으로 구현해도 됩니다.
-5. **Todo를 추가하면 제목 `input`과 내용 `input`은 다시 빈 값이 되도록 구현**합니다.
-6. **input에 값이 있는 상태에서 상세페이지로 이동하는 경우, input의 value가 초기화** 되도록 구현합니다.
-7. Todo의 완료상태**가 `true`**이면**,** 상태 버튼의 라벨을 **“취소”, `false`** 이면 라벨을 “**완료”** 로 보이도록 구현합니다.
-8. 전체 화면의 **최대 넓이는 `1200px`, 최소 넓이는 `800px`로 제한**하고, **컨텐츠를 화면의 가운데로 배치** 합니다.
+- 모달 2개를 구현합니다.
+    - `취소`, `확인`이 있고, overlay를 클릭했을 때 모달이 닫히지 않는 형태
+    - `닫기` 버튼만 있고, overlay를 클릭했을 때 모달이 닫히는 형태
+    - 모달을 `on` 시키는 버튼의 형태는 각각 달라야 합니다. (위에서 만든 버튼을 재사용하는 것도 좋아요.)
 
-## ✍️ 답변
+#### 2. Button
 
-### 질문에 대한 답변
+- 총 6개 형태의 버튼을 구현합니다. (예시 페이지에서 확인)
+    - `styled-components` 를 이용하여 구현하며, props를 적절하게 잘 활용하여 구현하세요.
+    - 버튼 label에 선택적으로 아이콘을 넣을 수 있도록 구현하세요.
 
-#### 1. 상세 페이지 이동을 위해 react-router-dom 라이브러리를 사용하셨을 거예요, CRA 라우팅이란 무엇인가요?
+#### 3. Input
 
-- CRA 라우팅은 Create React App으로 생성된 프로젝트에서 라우팅을 설정하는 것을 의미한다.
-- SPA(Single Page Application)에서 페이지를 새로고침하지 않고 페이지를 렌더링 하기 위해서 라우팅 솔루션(React Router)을 사용한다.
-- 일반적으로 React 애플리케이션에서는 페이지 간 이동을 관리하기 위해 react-router-dom 라이브러리를 사용한다. react-router-dom은 React 애플리케이션에서 URL을 관리하고, URL에 따라 다른 컴포넌트를 렌더링하는 것을 쉽게 만들어 준다.
+- 총 2개의 input을 구현합니다.
+    - 일반형식의 input
+    - 숫자를 넣었을 때, 3자리 수마다 `콤마 ,`가 찍히는 input
+    - form을 구현하고 각 input에 값을 입력하고 `저장` 버튼을 눌렀을 때 `{name: '아무 텍스트', price: "콤마가 없는 금액"}` 을 `alert`에 표시해보세요.
 
-#### 2. Redux를 사용하여 애플리케이션의 상태 관리를 하셨을 것입니다. 어떤 상태들을 Redux로 관리하셨나요? 그 상태 값을 Redux를 통해 관리함으로 얻은 이점은 무엇이었나요?
+#### 4. Select
+- select를 구현합니다.
+    - select를 클릭했을 때, option 들이 나오고 해당 option을 클릭하면 select의 값이 변경됩니다.
+    - select를 클릭했을 때 부모 요소에 의해서 가려지지 않도록 구현합니다. 부모 요소에 `overflow: hidden`을 적용하면 자식 컴포넌트가 부모 컴포넌트를 넘어갔을 때 가려지게 됩니다. 부모 컴포넌트에 `hidden` 속성이 있다고 하더라도 select는 가려지지 않아야 합니다.
 
-1. 전역으로 상태를 관리하고 dispatch를 통해 상태를 업데이트하게 되어 일반 컴포넌트에서의 가독성이 보다 향상되었다.
-2. 불필요한 props drilling이 줄어들었다.
 
-#### 3. Redux의 reducer 함수가 애플리케이션 로직과 어떻게 상호작용하는지 설명해 주세요.
-
-- Reducer 함수는 특정한 액션(action)이 디스패치(dispatch)될 때마다 현재의 상태와 액션을 받아서 새로운 상태를 반환한다.
-
-1. 액션 정의&생성
-2. 디스패치
-3. 상태 변화에 따라 UI 업데이트
-
-- 생성한 reducer를 전역 store에 저장하여 사용하면 된다.
-
-#### 4. CSS in JS 라이브러리 중 하나인 "styled component"를 사용했을 때의 이점은 많습니다.  CSS in JS가 제공하는 이점을 두 가지만 설명해 주세요.
-
-- CSS in JS 이기 때문에 CSS 파일을 따로 열 필요 없이 JS 파일 내에서 바로 스타일을 넣을 수 있다.
-- props를 활용하여 조건부 스타일링을 간편하게 구현할 수 있다.
-- js문법이라서 배우기가 쉽다.
-
-#### 5. useEffect hook을 사용한 부분이 있다면, 왜 사용해야 했고, 해당 hook이 언제 실행되는지 설명해주세요.
-
-- useEffect 훅을 사용할 필요는 없어보인다.
+## ✍️ 질문에 대한 답변
+#### 1. 모달을 구현할 때 `react-portal`을 사용 하셨나요? `react-portal`이 무엇이고 어떻게 작동하는지 설명해 주세요.
+- createPortal을 사용하면 일부 자식을 DOM의 다른 부분으로 렌더링할 수 있다. 그래서 모달을 구현할 때 유용하다.
+   - `index.html`의 `id="root"`인 div의 형제 노드로 `id="portal"`을 만들어 사용했다.
+#### 2. 다양한 형태의 버튼을 만들 때, 공통된 스타일 요소와 각각의 특별한 스타일 요소를 어떤 방법으로 styled-component에 적용하셨나요?
+- styled-component의 theme 를 사용하여 적용했다.
+#### 3. 숫자 입력 필드에서 사용자가 입력한 콤마가 포함된 금액과 콤마가 제거된 실제 금액 값을 각각 어떻게 관리하셨나요? 이를 위해 여러 상태를 사용하셨나요, 아니면 단일 상태를 통해 처리하셨나요?
+- 단일 state 사용
+- [`Number.prototype.toLocaleString()`]([https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString)) 메서드를 사용하여 사용자 인풋 값을 언어별(한국)로 표현한 문자열로 반환하는 방식을 사용하여 세 자리 수마다 `,`를 찍었다.
+#### 4. `overflow: hidden`이 적용된 부모 요소에도 영향을 받지 않고 옵션이 제대로 표시되게 하는 방법은 무엇인가요?
+- 드롭다운 컴포넌트를 리액트 포탈을 사용하여 모달로 구현한다.

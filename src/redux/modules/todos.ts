@@ -1,8 +1,9 @@
-// 액션 정의 생성 삭제 수정
-const ADD_TODO = "/todos/ADD_TODO";
-const DELETE_TODO = "/todos/DELETE_TODO";
-const UPDATE_TODO = "/todos/UPDATE_TODO";
+// Actions
+const ADD_TODO = "todos/ADD_TODO";
+const DELETE_TODO = "todos/DELETE_TODO";
+const UPDATE_TODO = "todos/UPDATE_TODO";
 
+// Action Creators
 export const addTodo = (payload) => {
   return {
     type: ADD_TODO,
@@ -40,7 +41,8 @@ const initialState = {
   ],
 };
 
-const todos = (state = initialState, action) => {
+// Reducer
+export default function todos(state = initialState, action) {
   switch (action.type) {
     //Unexpected lexical declaration in case block.eslintno-case-declarations 오류
     //중괄호로 감싸면 됨
@@ -76,6 +78,4 @@ const todos = (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export default todos;
+}
