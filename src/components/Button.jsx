@@ -1,44 +1,38 @@
-import styled from "styled-components";
+import styled, { useTheme } from 'styled-components';
 
 export default function Button({ onClick, children, type }) {
-  return (
-    <StBtn type={type} onClick={onClick}>
-      {children}
-    </StBtn>
-  );
+    const { button } = useTheme();
+
+    return (
+        <ButtonStyle type={type} onClick={onClick} $buttontype={button}>
+            {children}
+        </ButtonStyle>
+    );
 }
 
-const StBtn = styled.button`
-  height: 2.5rem;
-  border-radius: 8px;
-  border: 1.2px solid transparent;
-  min-width: 5rem;
-  padding: 0.6rem;
-  cursor: pointer;
-  outline: none;
-  transition: border-color linear 0.25s;
+const ButtonStyle = styled.button`
+    border-radius: 8px;
+    border: 1px solid lightgrey;
+    min-width: 5rem;
+    padding: 0.6rem;
+    cursor: pointer;
+    transition: border-color linear 0.25s;
+    outline: none;
 
-  &:hover,
-  &:focus,
-  &:focus-visible {
-    ${(props) => {
-      switch (props.type) {
-        case "btn-add":
-          return `border-color: rgb(62, 149, 255);
-                  background-color: rgb(164, 205, 255);`;
-
-        case "btn-delete":
-          return `border-color: rgb(255, 62, 62);
-                  background-color: rgb(255, 204, 204);`;
-
-        case "btn-done":
-          return `border-color: rgb(72, 255, 62);
-                  background-color: rgb(182, 255, 177);`;
-
-        default:
-          return `border-color: rgb(62, 149, 255);
-                  background-color: rgb(164, 205, 255);`;
-      }
-    }}
-  }
+    &:hover,
+    &:focus,
+    &:focus-visible {
+        ${({ type, $buttontype }) => {
+            switch (type) {
+                case 'btn-add':
+                    return $buttontype.btnAdd;
+                case 'btn-delete':
+                    return $buttontype.btnDelete;
+                case 'btn-done':
+                    return $buttontype.btnDone;
+                default:
+                    return $buttontype.btnAdd;
+            }
+        }}
+    }
 `;

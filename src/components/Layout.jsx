@@ -1,13 +1,14 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Layout({ children }) {
   return (
     <StLayout>
-      <StHeader>
-        <span>My Todo List</span>
+      <StHeader className="header">
+        <Logo to="/">My Todo List</Logo>
         <span>React</span>
       </StHeader>
-      <StMain>{children}</StMain>
+      <StMain className="main">{children}</StMain>
     </StLayout>
   );
 }
@@ -28,4 +29,8 @@ const StHeader = styled.header`
 
 const StMain = styled.main`
   padding: 1rem 0;
+`;
+
+const Logo = styled(Link)`
+  color: black;
 `;

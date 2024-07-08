@@ -1,10 +1,19 @@
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
-export default function Input({ onChange, value, label, name }) {
+export default function Input({ onChange, value, label, htmlFor }) {
+  const { colors } = useTheme();
+
   return (
     <StInputInfo>
-      <label htmlFor={name}>{label}</label>
-      <StInput value={value} onChange={onChange} name={name} type="text" />
+      <label htmlFor={htmlFor}>{label}</label>
+      <StInput
+        className="input"
+        value={value}
+        onChange={onChange}
+        name={htmlFor}
+        type="text"
+        theme={colors}
+      />
     </StInputInfo>
   );
 }
@@ -14,13 +23,13 @@ const StInputInfo = styled.div`
   font-weight: 700;
 `;
 const StInput = styled.input`
-  height: 25px;
+  height: 35px;
   width: 200px;
   border-radius: 20px;
   border: 1px solid transparent;
-  background-color: rgb(229, 241, 255);
+  background-color: ${({ theme }) => theme.whiteBlue};
   margin: 0.5rem;
-  padding: 0.3rem 0.5rem;
+  padding: 0.5rem;
   margin-right: 1rem;
   outline: none;
   transition: background-color linear 0.25s;
@@ -28,6 +37,7 @@ const StInput = styled.input`
   &:hover,
   &:focus,
   &:focus-visible {
-    background-color: rgb(164, 205, 255);
+    background-color: ${({ theme }) => theme.lightBlue};
+    border-color: ${({ theme }) => theme.blue};
   }
 `;
