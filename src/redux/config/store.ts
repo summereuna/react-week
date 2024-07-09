@@ -1,10 +1,6 @@
-import { combineReducers, createStore } from "redux";
-import todos from "../modules/todos";
+import rootReducer from "@redux/modules";
+import { createStore } from "redux";
 
-// store 설정
-const rootReducer = combineReducers({
-  todos,
-});
 const store = createStore(rootReducer);
 
 export default store;

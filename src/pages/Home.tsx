@@ -1,58 +1,34 @@
-import styled from "styled-components";
-import Form from "@components/Form";
-import CardsContainer from "@components/CardsContainer";
+import TodoForm from "@components/TodoForm";
+import TodoList from "@components/TodoList";
+import { RootState } from "@redux/modules";
+import * as S from "@styles/pages/home.style";
 import { useSelector } from "react-redux";
 
 const Home = () => {
-  const { todoList } = useSelector((state) => {
-    return state.todos;
-  });
-
-  const doneTodoList = todoList.filter((todo) => todo.isDone);
-  const workingTodoList = todoList.filter((todo) => !todo.isDone);
+  const todos = useSelector((state: RootState) => state.todos);
+  const doneTodoList = todos.filter((todo) => todo.isDone);
+  const workingTodoList = todos.filter((todo) => !todo.isDone);
 
   return (
     <>
-      {/* input 영역 */}
-      <InputContainer>
-        <Form />
-      </InputContainer>
-      {/* output 영역 */}
-      <OutputContainer>
-        {/* Working 영역 */}
-        <CardsContainer
+      <S.InputAreaWrapper>
+        <TodoForm />
+      </S.InputAreaWrapper>
+
+      <S.OutputAreaWrapper>
+        <TodoList
           todoList={workingTodoList}
-          type={"working"}
+          todoListType={"working"}
           cardsTitle="🔥 Working"
         />
-        {/* Done 영역 */}
-        <CardsContainer
+        <TodoList
           todoList={doneTodoList}
-          type={"done"}
+          todoListType={"done"}
           cardsTitle="✅ Done"
         />
-      </OutputContainer>
+      </S.OutputAreaWrapper>
     </>
   );
 };
 
 export default Home;
-
-const InputContainer = styled.div`
-  padding: 1rem;
-  margin: 1rem;
-  background-color: white;
-  border: 1px solid rgb(62, 149, 255);
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const OutputContainer = styled.div`
-  padding: 1rem 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;

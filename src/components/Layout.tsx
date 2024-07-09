@@ -1,36 +1,17 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import * as S from "@styles/components/layout.style";
 
-export default function Layout({ children }) {
-  return (
-    <StLayout>
-      <StHeader className="header">
-        <Logo to="/">My Todo List</Logo>
-        <span>React</span>
-      </StHeader>
-      <StMain className="main">{children}</StMain>
-    </StLayout>
-  );
+interface LayoutProps {
+  children: React.ReactNode;
 }
 
-const StLayout = styled.div`
-  max-width: 1200px;
-  min-width: 800px;
-  height: 100%;
-`;
-
-const StHeader = styled.header`
-  padding: 1rem 1rem 0 1rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const StMain = styled.main`
-  padding: 1rem 0;
-`;
-
-const Logo = styled(Link)`
-  color: black;
-`;
+export default function Layout({ children }: LayoutProps) {
+  return (
+    <S.Layout>
+      <S.Header className="header">
+        <S.Logo to="/">My Todo List</S.Logo>
+        <span>React</span>
+      </S.Header>
+      <S.Main className="main">{children}</S.Main>
+    </S.Layout>
+  );
+}

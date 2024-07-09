@@ -1,43 +1,27 @@
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "styled-components";
+import * as S from "@styles/components/input.style";
 
-export default function Input({ onChange, value, label, htmlFor }) {
+interface InputProps {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  label: string;
+  htmlFor: string;
+}
+
+export default function Input({ onChange, value, label, htmlFor }: InputProps) {
   const { colors } = useTheme();
 
   return (
-    <StInputInfo>
+    <S.InputWrapper>
       <label htmlFor={htmlFor}>{label}</label>
-      <StInput
-        className="input"
+      <S.Input
         value={value}
-        onChange={onChange}
-        name={htmlFor}
+        id={htmlFor}
+        onChange={(e) => onChange(e)}
         type="text"
         theme={colors}
+        autoComplete="off"
       />
-    </StInputInfo>
+    </S.InputWrapper>
   );
 }
-
-const StInputInfo = styled.div`
-  align-items: center;
-  font-weight: 700;
-`;
-const StInput = styled.input`
-  height: 35px;
-  width: 200px;
-  border-radius: 20px;
-  border: 1px solid transparent;
-  background-color: ${({ theme }) => theme.whiteBlue};
-  margin: 0.5rem;
-  padding: 0.5rem;
-  margin-right: 1rem;
-  outline: none;
-  transition: background-color linear 0.25s;
-
-  &:hover,
-  &:focus,
-  &:focus-visible {
-    background-color: ${({ theme }) => theme.lightBlue};
-    border-color: ${({ theme }) => theme.blue};
-  }
-`;

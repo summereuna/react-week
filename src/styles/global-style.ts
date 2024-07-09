@@ -1,18 +1,18 @@
 import { createGlobalStyle } from "styled-components";
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
     *{
       box-sizing: border-box;
     }
 
     a {
       text-decoration: none;
-      color: rgb(62, 149, 255);
-      transition: color ease-in-out 0.25s;
+      color: ${({ theme }) => theme.colors.blue};
+      transition: color linear 0.25s;
     }
     
     a:hover {
-      color: blue;
+      color:${({ theme }) => theme.colors.darkBlue};
     }
     
     body {
@@ -30,5 +30,3 @@ const GlobalStyle = createGlobalStyle`
       height: 100%;
     }
   `;
-
-export default GlobalStyle;

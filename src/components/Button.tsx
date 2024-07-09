@@ -1,38 +1,21 @@
-import styled, { useTheme } from 'styled-components';
+import * as S from "@styles/components/button.style";
 
-export default function Button({ onClick, children, type }) {
-    const { button } = useTheme();
-
-    return (
-        <ButtonStyle type={type} onClick={onClick} $buttontype={button}>
-            {children}
-        </ButtonStyle>
-    );
+interface ButtonProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+  type?: "button" | "submit";
+  buttonTheme?: "btnAdd" | "btnDelete" | "btnDone";
 }
 
-const ButtonStyle = styled.button`
-    border-radius: 8px;
-    border: 1px solid lightgrey;
-    min-width: 5rem;
-    padding: 0.6rem;
-    cursor: pointer;
-    transition: border-color linear 0.25s;
-    outline: none;
-
-    &:hover,
-    &:focus,
-    &:focus-visible {
-        ${({ type, $buttontype }) => {
-            switch (type) {
-                case 'btn-add':
-                    return $buttontype.btnAdd;
-                case 'btn-delete':
-                    return $buttontype.btnDelete;
-                case 'btn-done':
-                    return $buttontype.btnDone;
-                default:
-                    return $buttontype.btnAdd;
-            }
-        }}
-    }
-`;
+export default function Button({
+  children,
+  onClick,
+  type = "button",
+  buttonTheme = "btnAdd",
+}: ButtonProps) {
+  return (
+    <S.Button type={type} onClick={onClick} $buttonTheme={buttonTheme}>
+      {children}
+    </S.Button>
+  );
+}
