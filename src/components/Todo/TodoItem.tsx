@@ -2,7 +2,9 @@ import Button from "@components/Button";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Todo, deleteTodo, toggleTodo } from "@redux/modules/todos";
-import * as S from "@styles/components/todoItem.style";
+import * as S from "@styles/components/todo/todoItem.style";
+import { rightIcon } from "@shared/icons";
+import { CSIconS } from "@styles/components/icon.style";
 
 export default function TodoItem({ id, title, content, isDone }: Todo) {
   const dispatch = useDispatch();
@@ -22,7 +24,10 @@ export default function TodoItem({ id, title, content, isDone }: Todo) {
     >
       <S.TodoContentContainer>
         <Link to={`/${id}`}>
-          <S.LinkToDetailPageText>👉 상세페이지</S.LinkToDetailPageText>
+          <S.LinkToDetailPageText>
+            <CSIconS>{rightIcon}</CSIconS>
+            <span>상세페이지</span>
+          </S.LinkToDetailPageText>
         </Link>
         <S.Title>{title}</S.Title>
         <S.Content>{content}</S.Content>

@@ -1,5 +1,5 @@
-import TodoForm from "@components/TodoForm";
-import TodoList from "@components/TodoList";
+import TodoForm from "@components/Todo/TodoForm";
+import TodoList from "@components/Todo/TodoList";
 import { RootState } from "@redux/modules";
 import * as S from "@styles/pages/home.style";
 import { useSelector } from "react-redux";
