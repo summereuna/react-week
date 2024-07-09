@@ -38,6 +38,8 @@ export const TodoContentContainer = styled.div`
 
 export const LinkToDetailPageText = styled.span`
   font-size: small;
+  display: flex;
+  align-items: center;
 `;
 
 export const Title = styled.h3`

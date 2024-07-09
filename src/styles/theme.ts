@@ -31,9 +31,21 @@ const button = {
   },
 };
 
+const buttonShape = {
+  square: {
+    borderRadius: "8px",
+    minWidth: "5rem",
+  },
+  circle: {
+    borderRadius: "20px",
+    minWidth: "2rem",
+  },
+};
+
 const theme = {
   colors,
   button,
+  buttonShape,
 };
 
 export default theme;

@@ -1,6 +1,6 @@
-import TodoItem from "@components/TodoItem";
+import TodoItem from "@components/Todo/TodoItem";
 import { Todo } from "@redux/modules/todos";
-import * as S from "@styles/components/todoList.style";
+import * as S from "@styles/components/todo/todoList.style";
 
 interface TodoListProps {
   cardsTitle: string;
