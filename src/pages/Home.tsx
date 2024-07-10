@@ -1,13 +1,14 @@
+import { useAppSelector } from "@/hooks/rtkHooks";
 import TodoForm from "@components/Todo/TodoForm";
 import TodoList from "@components/Todo/TodoList";
-import { RootState } from "@redux/modules";
 import * as S from "@styles/pages/home.style";
-import { useSelector } from "react-redux";
 
 const Home = () => {
-  const todos = useSelector((state: RootState) => state.todos);
-  const doneTodoList = todos.filter((todo) => todo.isDone);
-  const workingTodoList = todos.filter((todo) => !todo.isDone);
+  // The `state` arg is correctly typed as `RootState` already!
+  const todoList = useAppSelector((state) => state.todos.todoList);
+
+  const doneTodoList = todoList.filter((todo) => todo.isDone);
+  const workingTodoList = todoList.filter((todo) => !todo.isDone);
 
   return (
     <>

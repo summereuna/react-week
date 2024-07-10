@@ -1,18 +1,17 @@
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Button from "@components/Button";
 import * as S from "@styles/pages/todoDetail.style";
-import { RootState } from "@redux/modules";
+import { useAppSelector } from "@/hooks/rtkHooks";
 
 const TodoDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const todos = useSelector((state: RootState) => state.todos);
+  const todoList = useAppSelector((state) => state.todos.todoList);
 
-  const todoData = todos.find((todo) => {
-    return todo.id === parseInt(id!);
+  const todoData = todoList.find((todo) => {
+    return todo.id === id;
   });
 
   const backPage = () => {

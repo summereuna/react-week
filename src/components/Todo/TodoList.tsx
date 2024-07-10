@@ -1,5 +1,5 @@
 import TodoItem from "@components/Todo/TodoItem";
-import { Todo } from "@redux/modules/todos";
+import { Todo } from "@redux/modules/todosSlice";
 import * as S from "@styles/components/todo/todoList.style";
 
 interface TodoListProps {

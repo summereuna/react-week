@@ -1,19 +1,20 @@
 import Button from "@components/Button";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Todo, deleteTodo, toggleTodo } from "@redux/modules/todos";
+import { deleteTodo, toggleTodo } from "@redux/modules/todosSlice";
+import type { Todo } from "@redux/modules/todosSlice";
 import * as S from "@styles/components/todo/todoItem.style";
 import { rightIcon } from "@shared/icons";
 import { CSIconS } from "@styles/components/icon.style";
+import { useAppDispatch } from "@/hooks/rtkHooks";
 
 export default function TodoItem({ id, title, content, isDone }: Todo) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const onDeleteTodoClick = (id: number) => {
+  const onDeleteTodoClick = (id: string) => {
     dispatch(deleteTodo(id));
   };
 
-  const onDoneClick = (id: number) => {
+  const onDoneClick = (id: string) => {
     dispatch(toggleTodo(id));
   };
 

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addTodo } from "@redux/modules/todos";
+import { addTodo } from "@redux/modules/todosSlice";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import * as S from "@styles/components/todo/todoForm.style";
@@ -8,10 +7,11 @@ import useModal from "@/hooks/useModal";
 import ModalPortal from "@components/Modal/ModalPortal";
 import ModalLayout from "@components/Modal/ModalLayout";
 import AlertModal from "@components/Modal/AlertModal";
+import { useAppDispatch } from "@/hooks/rtkHooks";
 
 export default function TodoForm() {
   const { isVisible, openModal, closeModal } = useModal();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [input, setInput] = useState({ title: "", content: "" });
 
