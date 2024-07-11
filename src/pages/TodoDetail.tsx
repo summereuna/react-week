@@ -5,7 +5,7 @@ import * as S from "@styles/pages/todoDetail.style";
 import { useAppSelector } from "@/hooks/rtkHooks";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getTodoById } from "@redux/modules/todosSlice";
+import { getTodoById } from "@redux/slices/todosSlice";
 
 const TodoDetail = () => {
   const { id } = useParams();

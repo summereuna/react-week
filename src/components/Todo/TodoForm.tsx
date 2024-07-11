@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addTodo } from "@redux/modules/todosSlice";
+import { addTodo } from "@redux/slices/todosSlice";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import * as S from "@styles/components/todo/todoForm.style";

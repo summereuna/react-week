@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { Provider } from "react-redux";
-import store from "@redux/config/store";
+import configStore from "@redux/config/configStore";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
-  <Provider store={store}>
+  <Provider store={configStore}>
     <App />
   </Provider>
   // </React.StrictMode>

@@ -1,7 +1,7 @@
 import Button from "@components/Button";
 import { Link } from "react-router-dom";
-import { deleteTodo, toggleTodo } from "@redux/modules/todosSlice";
-import type { Todo } from "@redux/modules/todosSlice";
+import { deleteTodo, toggleTodo } from "@redux/slices/todosSlice";
+import type { Todo } from "@redux/slices/todosSlice";
 import * as S from "@styles/components/todo/todoItem.style";
 import { rightIcon } from "@shared/icons";
 import { CSIconS } from "@styles/components/icon.style";

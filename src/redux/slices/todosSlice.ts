@@ -78,11 +78,10 @@ export const todosSlice = createSlice({
     },
     getTodoById: (state, action: PayloadAction<string>) => {
       const id = action.payload;
+      const findTodo = state.todoList.find((todo) => todo.id === id);
       return {
         ...state,
-        todo: state.todoList.find((todo) => {
-          return todo.id === id;
-        }),
+        todo: findTodo!, //예외 처리는 나중에
       };
     },
   },
