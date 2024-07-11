@@ -12,6 +12,7 @@ export type Todo = {
 
 export interface TodosState {
   todoList: Todo[];
+  todo: Todo; //상세페이지 초기값 세팅 시 필요해서 추가 근데 앞으로 필요 없을 수도?
 }
 
 const initialState: TodosState = {
@@ -29,6 +30,12 @@ const initialState: TodosState = {
       isDone: false,
     },
   ],
+  todo: {
+    id: "0",
+    title: "",
+    content: "",
+    isDone: false,
+  },
 };
 
 export const todosSlice = createSlice({
@@ -69,10 +76,20 @@ export const todosSlice = createSlice({
         ),
       };
     },
+    getTodoById: (state, action: PayloadAction<string>) => {
+      const id = action.payload;
+      return {
+        ...state,
+        todo: state.todoList.find((todo) => {
+          return todo.id === id;
+        }),
+      };
+    },
   },
 });
 
-export const { addTodo, deleteTodo, toggleTodo } = todosSlice.actions;
+export const { addTodo, deleteTodo, toggleTodo, getTodoById } =
+  todosSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectTodos = (state: RootState) => state.todos.todoList;
