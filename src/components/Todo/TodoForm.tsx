@@ -13,25 +13,22 @@ export default function TodoForm() {
   const { isVisible, openModal, closeModal } = useModal();
   const dispatch = useAppDispatch();
 
-  const [input, setInput] = useState({ title: "", content: "" });
+  const [todo, setTodo] = useState({ title: "", content: "" });
 
-  const changeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput({ ...input, title: e.target.value });
-  };
-
-  const changeContent = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput({ ...input, content: e.target.value });
+  const changeTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setTodo({ ...todo, [name]: value });
   };
 
   const onAddTodoClick = (e: React.FormEvent) => {
     e.preventDefault(); //리로드 방지
 
-    if (!input.title.trim() || !input.content.trim()) {
+    if (!todo.title.trim() || !todo.content.trim()) {
       return openModal();
     }
 
-    dispatch(addTodo(input));
-    setInput({ title: "", content: "" });
+    dispatch(addTodo(todo));
+    setTodo({ title: "", content: "" });
   };
 
   return (
@@ -39,16 +36,16 @@ export default function TodoForm() {
       <S.Form onSubmit={onAddTodoClick}>
         <S.InputContainer>
           <Input
-            onChange={changeTitle}
-            value={input.title}
+            onChange={changeTodo}
+            value={todo.title}
             label="제목"
-            htmlFor="todo-title"
+            name="title"
           />
           <Input
-            onChange={changeContent}
-            value={input.content}
+            onChange={changeTodo}
+            value={todo.content}
             label="내용"
-            htmlFor="todo-content"
+            name="content"
           />
         </S.InputContainer>
         <Button type="submit" buttonTheme="btnAdd">
