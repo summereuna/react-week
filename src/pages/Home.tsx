@@ -1,11 +1,11 @@
-import Button from "@components/Button";
 import { useNavigate } from "react-router-dom";
-import { rightIcon } from "@shared/icons";
 import * as S from "@styles/pages/home.style";
 import useModal from "@/hooks/useModal";
 import ModalPortal from "@components/Modal/ModalPortal";
 import ModalLayout from "@components/Modal/ModalLayout";
 import ModalAlert from "@components/Modal/ModalAlert";
+import Card from "@components/Card";
+
 const Home = () => {
   const navigate = useNavigate();
   const { isVisible, openModal, closeModal } = useModal();
@@ -13,9 +13,7 @@ const Home = () => {
   const handleClick = () => {
     const token = localStorage.getItem("accessToken");
     if (!token) {
-      openModal();
-    } else {
-      return navigate("/mypage");
+      return openModal();
     }
   };
 
@@ -27,15 +25,23 @@ const Home = () => {
 
   return (
     <S.MainContainer>
-      <h2>📝 Todo List</h2>
-      <S.AboutText>
-        나만의
-        <br />
-        투두리스트를 작성해 보세요!
-      </S.AboutText>
-      <Button onClick={handleClick} icon={rightIcon}>
-        내 페이지 가기
-      </Button>
+      <h1>📝 Todo List</h1>
+      <S.AboutContainer>
+        <Card
+          title={`👀`}
+          content={`모든 투두리스트를\n구경해 보세요!`}
+          goTo={`보러 가기`}
+          path={`/todos`}
+          onClick={handleClick}
+        />
+        <Card
+          title={`✍🏻`}
+          content={`나만의 투두리스트를\n작성해 보세요!`}
+          goTo={`내 페이지 가기`}
+          path={`/mypage`}
+          onClick={handleClick}
+        />
+      </S.AboutContainer>
 
       {isVisible && (
         <ModalPortal>

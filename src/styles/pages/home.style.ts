@@ -8,10 +8,12 @@ export const MainContainer = styled.div`
   height: 85vh;
 `;
 
-export const AboutText = styled.p`
+export const AboutContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  flex-direction: row;
   align-items: center;
-  text-align: center;
+  justify-content: center;
   padding: 1rem;
+  width: 100%;
 `;
