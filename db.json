@@ -1,0 +1,16 @@
+{
+  "todoList": [
+    {
+      "id": "1",
+      "title": "리액트 공부",
+      "content": "입문 강의 듣기",
+      "isDone": false
+    },
+    {
+      "id": "2",
+      "title": "리액트 공부",
+      "content": "lv.1 개인 과제 제출",
+      "isDone": true
+    }
+  ]
+}

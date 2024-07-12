@@ -1,26 +1,44 @@
 import Button from "@components/Button";
 import { Link } from "react-router-dom";
-import { deleteTodo, toggleTodo } from "@redux/slices/todosSlice";
 import type { Todo } from "@redux/slices/todosSlice";
 import * as S from "@styles/components/todo/todoItem.style";
 import { rightIcon } from "@shared/icons";
 import { CSIconS } from "@styles/components/icon.style";
-import { useAppDispatch } from "@/hooks/rtkHooks";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteTodo, toggleTodo } from "@/api/todos";
 
 export default function TodoItem({ id, title, content, isDone }: Todo) {
-  const dispatch = useAppDispatch();
+  const queryClient = useQueryClient();
+
+  // DELETE
+  const { mutate: deleteMutate } = useMutation({
+    mutationFn: deleteTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
+    },
+  });
+
+  // UPDATE
+  const { mutate: toggleMutate } = useMutation({
+    mutationFn: toggleTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
+    },
+  });
 
   const onDeleteTodoClick = (id: string) => {
-    dispatch(deleteTodo(id));
+    deleteMutate(id);
   };
 
-  const onDoneClick = (id: string) => {
-    dispatch(toggleTodo(id));
+  const onToggleClick = (id: string) => {
+    toggleMutate(id);
   };
+
+  console.log("✅ 현재 투두 아이디", typeof id);
 
   return (
     <S.TodoWrapper
-      id={id.toString()} // div 요소의 id 속성은 문자열이어야 함
+      id={id} // div 요소의 id 속성은 문자열이어야 함 > 걍 다 문자열로 통일 ^^~~ 혹시 나중에 서버 바꿔서 uuid 쓸거 생각하면
       $isDone={`${isDone ? "done" : "working"}`}
     >
       <S.TodoContentContainer>
@@ -44,7 +62,7 @@ export default function TodoItem({ id, title, content, isDone }: Todo) {
         </Button>
         <Button
           onClick={() => {
-            onDoneClick(id);
+            onToggleClick(id);
           }}
           buttonTheme={isDone ? "btnAdd" : "btnDone"}
         >

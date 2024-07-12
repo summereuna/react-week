@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "@redux/config/store";
+import type { RootState } from "@redux/config/configStore";
 import { v4 as uuidv4 } from "uuid";
 
 export type Todo = {
-  id: string; // uuid 문자열 반환
+  id: string; //나중에 uuid로
   title: string;
   content: string;
   isDone: boolean;
@@ -12,7 +12,6 @@ export type Todo = {
 
 export interface TodosState {
   todoList: Todo[];
-  todo: Todo; //상세페이지 초기값 세팅 시 필요해서 추가 근데 앞으로 필요 없을 수도?
 }
 
 const initialState: TodosState = {
@@ -30,12 +29,6 @@ const initialState: TodosState = {
       isDone: false,
     },
   ],
-  todo: {
-    id: "0",
-    title: "",
-    content: "",
-    isDone: false,
-  },
 };
 
 export const todosSlice = createSlice({
@@ -94,3 +87,6 @@ export const { addTodo, deleteTodo, toggleTodo, getTodoById } =
 export const selectTodos = (state: RootState) => state.todos.todoList;
 
 export default todosSlice.reducer;
+
+
+//오잉 그럼 이거 필요 없는거 아니야
