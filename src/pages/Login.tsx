@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authLogin } from "@/api/auth";
 import { useAppDispatch } from "@/hooks/rtkHooks";
@@ -19,11 +18,11 @@ const Login = () => {
     onSuccess: (data) => {
       console.log(data);
       dispatch(login(data.accessToken)); //리덕스 전역으로 토큰 저장
-      queryClient.invalidateQueries(["authLogin"]);
+      queryClient.invalidateQueries({ queryKey: ["authLogin"]});
       navigate("/mypage");
     },
     onError: (error) => {
-      alert("로그인 실패:", error.message);
+      alert(error.message);
     },
   });
 

@@ -13,11 +13,11 @@ const Signup = () => {
     mutationFn: authRegister,
     onSuccess: (data) => {
       console.log(data);
-      queryClient.invalidateQueries(["authRegister"]);
+      queryClient.invalidateQueries({ queryKey: ["authRegister"] });
       navigate("/login");
     },
     onError: (error) => {
-      alert("가입실패:", error.message);
+      alert(error.message);
     },
   });
 

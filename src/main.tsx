@@ -11,8 +11,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
   <Provider store={configStore}>
     <QueryClientProvider client={queryClient}>
-      {/* 개발 환경에서만 ReactQueryDevtools를 사용 */}
-      {/* {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />} */}
+      {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
       <App />
     </QueryClientProvider>
   </Provider>

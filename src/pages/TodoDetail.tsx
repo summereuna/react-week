@@ -21,8 +21,8 @@ const TodoDetail = () => {
     enabled: !!id, // id가 있을 때만 쿼리를 실행
   });
 
-  if (isPending) return <div>Loading...</div>;
-  if (isError || !todo) return <div>Error occurred</div>;
+  if (isPending) return <div>🫠 로딩 중...</div>;
+  if (isError || !todo) return <div>❌ 에러 발생!</div>;
 
   const backPage = () => {
     navigate(-1);

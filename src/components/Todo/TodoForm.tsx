@@ -24,7 +24,7 @@ export default function TodoForm() {
   const { mutate } = useMutation({
     mutationFn: addTodo,
     onSuccess: () => {
-      queryClient.invalidateQueries(["todos"]);
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
   //=============리액트 쿼리=============

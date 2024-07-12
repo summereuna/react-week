@@ -14,7 +14,7 @@ export default function TodoItem({ id, title, content, isDone }: Todo) {
   const { mutate: deleteMutate } = useMutation({
     mutationFn: deleteTodo,
     onSuccess: () => {
-      queryClient.invalidateQueries(["todos"]);
+      queryClient.invalidateQueries({ queryKey: ["todos"]});
     },
   });
 
@@ -22,7 +22,7 @@ export default function TodoItem({ id, title, content, isDone }: Todo) {
   const { mutate: toggleMutate } = useMutation({
     mutationFn: toggleTodo,
     onSuccess: () => {
-      queryClient.invalidateQueries(["todos"]);
+      queryClient.invalidateQueries({ queryKey: ["todos"]});
     },
   });
 
