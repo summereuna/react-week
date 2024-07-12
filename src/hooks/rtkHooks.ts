@@ -1,11 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState, AppDispatch } from "@redux/config/store";
+import type { RootState, AppDispatch } from "@redux/config/configStore";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
-
-
 
 // RootState 및 AppDispatch 유형을 각 구성 요소로 가져올 수 있지만 애플리케이션에서 사용할 useDispatch 및 useSelector 후크의 형식화된 버전을 만드는 것이 더 좋습니다. 이는 다음과 같은 몇 가지 이유로 중요합니다.
 // - useSelector의 경우 매번 (상태: RootState)를 입력할 필요가 없어집니다.

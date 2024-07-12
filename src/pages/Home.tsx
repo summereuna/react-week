@@ -1,53 +1,53 @@
-import TodoForm from "@components/Todo/TodoForm";
-import TodoList from "@components/Todo/TodoList";
-import { Todo } from "@redux/slices/todosSlice";
+import Button from "@components/Button";
+import { useNavigate } from "react-router-dom";
+import { rightIcon } from "@shared/icons";
 import * as S from "@styles/pages/home.style";
-
-import { fetchTodos } from "@/api/todos";
-import { useQuery } from "@tanstack/react-query";
-
+import useModal from "@/hooks/useModal";
+import ModalPortal from "@components/Modal/ModalPortal";
+import ModalLayout from "@components/Modal/ModalLayout";
+import ModalAlert from "@components/Modal/ModalAlert";
 const Home = () => {
-  //GET
-  const {
-    data: todoList,
-    isPending,
-    isError,
-  } = useQuery<Todo[], Error>({
-    queryKey: ["todos"],
-    queryFn: fetchTodos,
-  });
+  const navigate = useNavigate();
+  const { isVisible, openModal, closeModal } = useModal();
 
-  if (isPending) {
-    return <div>🫠 로딩중...</div>;
-  }
+  const handleClick = () => {
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      openModal();
+    } else {
+      return navigate("/mypage");
+    }
+  };
 
-  if (isError) {
-    return <div>❌ 데이터 조회 중 오류가 발생했습니다!</div>;
-  }
-
-  //isLoading보다 아래 있어야 오류 안남
-  const workingTodoList = todoList.filter((todo: Todo) => !todo.isDone);
-  const doneTodoList = todoList.filter((todo: Todo) => todo.isDone);
+  const handleCloseModal = () => {
+    closeModal(() => {
+      navigate("/login");
+    });
+  };
 
   return (
-    <>
-      <S.InputAreaWrapper>
-        <TodoForm />
-      </S.InputAreaWrapper>
+    <S.MainContainer>
+      <h2>📝 Todo List</h2>
+      <S.AboutText>
+        나만의
+        <br />
+        투두리스트를 작성해 보세요!
+      </S.AboutText>
+      <Button onClick={handleClick} icon={rightIcon}>
+        내 페이지 가기
+      </Button>
 
-      <S.OutputAreaWrapper>
-        <TodoList
-          todoList={workingTodoList}
-          todoListType={"working"}
-          cardsTitle="🔥 Working"
-        />
-        <TodoList
-          todoList={doneTodoList}
-          todoListType={"done"}
-          cardsTitle="✅ Done"
-        />
-      </S.OutputAreaWrapper>
-    </>
+      {isVisible && (
+        <ModalPortal>
+          <ModalLayout onClose={handleCloseModal}>
+            <ModalAlert
+              onClose={handleCloseModal}
+              content={`로그인이 필요합니다!`}
+            />
+          </ModalLayout>
+        </ModalPortal>
+      )}
+    </S.MainContainer>
   );
 };
 

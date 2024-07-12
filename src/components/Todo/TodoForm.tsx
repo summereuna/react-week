@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Todo } from "@redux/slices/todosSlice";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import * as S from "@styles/components/todo/todoForm.style";
@@ -11,6 +10,7 @@ import ModalAlert from "@components/Modal/ModalAlert";
 // import { v4 as uuidv4 } from "uuid";
 import { addTodo, fetchTodos } from "@/api/todos";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Todo } from "@/types";
 
 type ErrorParamsType = {
   title: string;

@@ -1,6 +1,8 @@
 import * as S from "@styles/components/button.style";
 import { CSIconM } from "@styles/components/icon.style";
 
+// type buttonTheme = "btnAdd" | "btnDelete" | "btnDone";
+
 interface ButtonProps {
   children?: React.ReactNode;
   icon?: React.ReactNode;
@@ -25,8 +27,8 @@ export default function Button({
       $buttonTheme={buttonTheme}
       $buttonShape={buttonShape}
     >
-      {children ? <div>{children}</div> : null}
       {icon ? <CSIconM>{icon}</CSIconM> : null}
+      {children ? <div>{children}</div> : null}
     </S.Button>
   );
 }

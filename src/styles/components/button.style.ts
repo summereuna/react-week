@@ -6,13 +6,18 @@ interface ButtonThemeProps {
 }
 
 export const Button = styled.button<ButtonThemeProps>`
+  //
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  //
   border: ${({ theme }) => `1px solid ${theme.colors.grey}`};
   background-color: ${({ theme }) => theme.colors.lightGrey};
   padding: 0.6rem;
   cursor: pointer;
   transition: border-color linear 0.2s;
   outline: none;
-
   ${({ $buttonShape, theme }) =>
     $buttonShape &&
     css`

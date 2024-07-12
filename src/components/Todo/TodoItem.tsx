@@ -1,11 +1,11 @@
 import Button from "@components/Button";
 import { Link } from "react-router-dom";
-import type { Todo } from "@redux/slices/todosSlice";
 import * as S from "@styles/components/todo/todoItem.style";
 import { rightIcon } from "@shared/icons";
 import { CSIconS } from "@styles/components/icon.style";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteTodo, toggleTodo } from "@/api/todos";
+import { Todo } from "@/types";
 
 export default function TodoItem({ id, title, content, isDone }: Todo) {
   const queryClient = useQueryClient();

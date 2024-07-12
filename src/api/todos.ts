@@ -1,51 +1,39 @@
-// axios 요청 들어가는 모든 모듈
-
 import api from "@axios/api";
-import { Todo } from "@redux/slices/todosSlice";
+import { Todo } from "@/types";
 
 // GET TodoList 조회
-export const fetchTodos = async (): Promise<Todo[]> => {
-  const response = await api.get<Todo[]>(`/todoList`);
+export const fetchTodos = async () => {
+  const response = await api.get(`/todoList`);
   return response.data;
 };
 
-export const fetchTodoById = async (id: string): Promise<Todo> => {
-  const response = await api.get<Todo>(`/todoList/${id}`);
+export const fetchTodoById = async (id: string) => {
+  const response = await api.get(`/todoList/${id}`);
   return response.data;
 };
 
 // POST Todo 더하기
 // id는 서버에서 받아옴
-export const addTodo = async (newTodo: Omit<Todo, "id">): Promise<Todo> => {
-  const response = await api.post<Todo>(`/todoList`, newTodo);
+export const addTodo = async (newTodo: Omit<Todo, "id">) => {
+  const response = await api.post(`/todoList`, newTodo);
   return response.data;
 };
 
 // DELETE Todo 지우기
-export const deleteTodo = async (id: string): Promise<void> => {
+export const deleteTodo = async (id: string) => {
   await api.delete(`/todoList/${id}`);
 };
 
-// PATCH Todo 업데이트하기
-export const editTodo = async (updatedTodo: Todo): Promise<Todo> => {
-  const response = await api.patch<Todo>(
-    `/todoList/${updatedTodo.id}`,
-    updatedTodo
-  );
-  return response.data;
-};
-
 // PATCH isDone toggle 업데이트하기
-export const toggleTodo = async (id: string): Promise<Todo> => {
+export const toggleTodo = async (id: string) => {
   const currentTodo = await fetchTodoById(id);
   const updatedTodo = { ...currentTodo, isDone: !currentTodo.isDone };
-  const response = await api.patch<Todo>(`/todoList/${id}`, updatedTodo);
+  const response = await api.patch(`/todoList/${id}`, updatedTodo);
   return response.data;
 };
 
-// const id = action.payload;
-// const findTodo = state.todoList.find((todo) => todo.id === id);
-// return {
-//   ...state,
-//   todo: findTodo!, //예외 처리는 나중에
-// };
+// PATCH Todo 업데이트하기
+export const editTodo = async (updatedTodo: Todo) => {
+  const response = await api.patch(`/todoList/${updatedTodo.id}`, updatedTodo);
+  return response.data;
+};

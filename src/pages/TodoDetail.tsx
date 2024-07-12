@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Button from "@components/Button";
 import * as S from "@styles/pages/todoDetail.style";
-import { Todo } from "@redux/slices/todosSlice";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTodoById } from "@/api/todos";
+import { Todo } from "@/types";
 
 const TodoDetail = () => {
   const navigate = useNavigate();
