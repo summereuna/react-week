@@ -7,8 +7,11 @@ export default function useModal() {
     setIsVisible(true);
   }, []);
 
-  const closeModal = useCallback(() => {
+  const closeModal = useCallback((callback?: () => void) => {
     setIsVisible(false);
+    if (typeof callback === "function") { //콜백 함수인 경우만 실행
+      callback();
+    }
   }, []);
 
   return {

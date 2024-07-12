@@ -5,12 +5,13 @@ import { rightIcon } from "@shared/icons";
 import { CSIconS } from "@styles/components/icon.style";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteTodo, toggleTodo } from "@/api/todos";
-import { Todo } from "@/types";
 import useUser from "@/hooks/useUser";
+import { Todo as TodoType } from "@/types";
 
-export default function TodoItem({ id, userId, title, content, isDone }: Todo) {
+export default function Todo({ id, userId, title, content, isDone }: TodoType) {
   const queryClient = useQueryClient();
   const { id: authUserId } = useUser();
+
   // DELETE
   const { mutate: deleteMutate } = useMutation({
     mutationFn: deleteTodo,
@@ -36,6 +37,8 @@ export default function TodoItem({ id, userId, title, content, isDone }: Todo) {
     if (userId !== authUserId) return;
     toggleMutate(id);
   };
+
+  console.log("✅ 현재 투두 아이디", typeof id);
 
   return (
     <S.TodoWrapper

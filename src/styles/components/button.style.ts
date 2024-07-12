@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 interface ButtonThemeProps {
   $buttonTheme?: "btnAdd" | "btnDelete" | "btnDone";
   $buttonShape?: "square" | "circle";
+  $buttonSize?: "s" | "m" | "lg";
 }
 
 export const Button = styled.button<ButtonThemeProps>`
@@ -12,12 +13,17 @@ export const Button = styled.button<ButtonThemeProps>`
   cursor: pointer;
   transition: border-color linear 0.2s;
   outline: none;
-
   ${({ $buttonShape, theme }) =>
     $buttonShape &&
     css`
       border-radius: ${theme.buttonShape[$buttonShape]?.borderRadius};
       min-width: ${theme.buttonShape[$buttonShape]?.minWidth};
+    `};
+
+  ${({ $buttonSize, theme }) =>
+    $buttonSize &&
+    css`
+      width: ${theme.buttonSize[$buttonSize]?.width};
     `};
 
   &:hover,

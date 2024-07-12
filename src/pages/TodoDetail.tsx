@@ -1,19 +1,31 @@
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Button from "@components/Button";
 import * as S from "@styles/pages/todoDetail.style";
-import { RootState } from "@redux/modules";
+import { useQuery } from "@tanstack/react-query";
+import { fetchTodoById } from "@/api/todos";
+import { ButtonWrapper } from "@styles/components/todo/todoForm.style";
+import useUser from "@/hooks/useUser";
 
 const TodoDetail = () => {
-  const { id } = useParams();
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
+  const todoId = id ? id : undefined;
 
-  const todos = useSelector((state: RootState) => state.todos);
+  const { id: userId } = useUser();
 
-  const todoData = todos.find((todo) => {
-    return todo.id === parseInt(id!);
+  const {
+    data: todo,
+    isPending,
+    isError,
+  } = useQuery({
+    queryKey: ["todo", todoId],
+    queryFn: () => fetchTodoById(todoId as string),
+    enabled: !!id, // id가 있을 때만 쿼리를 실행
   });
+
+  if (isPending) return <div>🫠 로딩 중...</div>;
+  if (isError || !todo) return <div>❌ 에러 발생!</div>;
 
   const backPage = () => {
     navigate(-1);
@@ -21,15 +33,20 @@ const TodoDetail = () => {
 
   return (
     <>
-      <S.DetailWrapper $isDone={todoData?.isDone ? "done" : "working"}>
-        <S.Detail $isDone={todoData?.isDone ? "done" : "working"}>
+      <S.DetailWrapper $isDone={todo.isDone ? "done" : "working"}>
+        <S.Detail $isDone={todo.isDone ? "done" : "working"}>
           <S.DetailHeader>
-            <span>ID:{todoData?.id}</span>
-            <Button onClick={backPage}>뒤로가기</Button>
+            <S.DetailTodoInfo>
+              <span>작성자: {userId} 님</span>
+              <span>id:{todo.id}</span>
+            </S.DetailTodoInfo>
+            <ButtonWrapper>
+              <Button onClick={backPage}>뒤로가기</Button>
+            </ButtonWrapper>
           </S.DetailHeader>
           <S.DetailTodo>
-            <h3>{todoData?.title}</h3>
-            <p>{todoData?.content}</p>
+            <h3>{todo.title}</h3>
+            <p>{todo.content}</p>
           </S.DetailTodo>
         </S.Detail>
       </S.DetailWrapper>

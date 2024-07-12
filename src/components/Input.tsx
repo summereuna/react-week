@@ -5,23 +5,29 @@ interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
   label: string;
-  htmlFor: string;
+  name: string;
+  type?: string;
 }
 
-export default function Input({ onChange, value, label, htmlFor }: InputProps) {
+export default function Input({
+  onChange,
+  value,
+  label,
+  name,
+  type = "text",
+}: InputProps) {
   const { colors } = useTheme();
 
   return (
-    <S.InputWrapper>
-      <label htmlFor={htmlFor}>{label}</label>
-      <S.Input
-        value={value}
-        id={htmlFor}
-        onChange={(e) => onChange(e)}
-        type="text"
-        theme={colors}
-        autoComplete="off"
-      />
-    </S.InputWrapper>
+    <S.Input
+      value={value}
+      id={name}
+      name={name}
+      onChange={(e) => onChange(e)}
+      type={type}
+      theme={colors}
+      placeholder={label}
+      autoComplete="off"
+    />
   );
 }

@@ -1,20 +1,19 @@
 import styled from "styled-components";
 
-export const InputAreaWrapper = styled.div`
-  padding: 1rem;
-  margin: 1rem;
-  background-color: white;
-  border: 1px solid rgb(62, 149, 255);
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const OutputAreaWrapper = styled.div`
-  padding: 1rem 0;
+export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  padding: 5rem;
+  height: 85vh;
+`;
+
+export const AboutContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  width: 100%;
 `;

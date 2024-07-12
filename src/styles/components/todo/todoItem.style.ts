@@ -42,6 +42,10 @@ export const LinkToDetailPageText = styled.span`
   align-items: center;
 `;
 
+export const UserName = styled.span`
+  font-size: small;
+`;
+
 export const Title = styled.h3`
   margin: 0;
   padding: 0.5rem;
@@ -64,4 +68,5 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 1rem;
 `;
