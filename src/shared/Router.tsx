@@ -38,10 +38,10 @@ const Router = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<PublicRoute element={Login} />} />
           <Route path="/signup" element={<PublicRoute element={Signup} />} />
-          <Route path="/todos" element={<PrivateRoute element={Todos} />} />
           <Route path="/mypage" element={<PrivateRoute element={MyTodos} />} />
+          <Route path="/todos" element={<PrivateRoute element={Todos} />} />
           <Route
-            path="/mypage/:id"
+            path="/todos/:id"
             element={<PrivateRoute element={TodoDetail} />}
           />
 

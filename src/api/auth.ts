@@ -16,12 +16,12 @@ export const authRegister = async (user: User) => {
 };
 
 // // GET 유저
-// export const getUserByToken = async (token: string) => {
-//   const response = await authApi.get(`/user`, {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
-//   console.log(response);
-//   return response.data;
-// };
+export const getUserByToken = async (token: string) => {
+  const response = await authApi.get(`/user`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log(response);
+  return response.data;
+};

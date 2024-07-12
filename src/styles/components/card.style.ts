@@ -39,7 +39,8 @@ export const LinkWrapper = styled.div`
   padding: 0.3rem 0.3rem 0.3rem 0;
 
   &:hover {
-    background-color: #ffffe2;
+    background-color: ${({ theme }) => theme.colors.blue};
+    color: white;
   }
 `;
 

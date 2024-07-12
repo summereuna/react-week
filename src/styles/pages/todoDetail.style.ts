@@ -5,9 +5,9 @@ interface DoneProps {
 }
 
 export const DetailWrapper = styled.div<DoneProps>`
-  max-width: 100%;
-  height: 85vh;
   max-height: 100%;
+  height: calc(100vh - 70px);
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,6 +56,12 @@ export const DetailHeader = styled.div`
   align-items: center;
   padding: 1rem;
   border-bottom: 2px solid lightgrey;
+`;
+
+export const DetailTodoInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: small;
 `;
 
 export const DetailTodo = styled.div`

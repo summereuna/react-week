@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteTodo, toggleTodo } from "@/api/todos";
 import { Todo } from "@/types";
 
-export default function TodoItem({ id, userId, title, content, isDone }: Todo) {
+export default function Todo({ id, title, content, isDone }: Todo) {
   const queryClient = useQueryClient();
 
   // DELETE
@@ -34,7 +34,7 @@ export default function TodoItem({ id, userId, title, content, isDone }: Todo) {
     toggleMutate(id);
   };
 
-  // console.log("✅ 현재 투두 아이디", typeof id);
+  console.log("✅ 현재 투두 아이디", typeof id);
 
   return (
     <S.TodoWrapper

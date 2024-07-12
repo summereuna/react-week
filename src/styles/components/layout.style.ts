@@ -25,7 +25,9 @@ export const Header = styled.header`
 `;
 
 export const Main = styled.main`
-  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Logo = styled(Link)`

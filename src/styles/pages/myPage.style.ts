@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+export const MyTodosWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const MyTodosTitle = styled.div`
+  font-size: x-large;
+  font-weight: 600;
+  margin-top: 2rem;
+`;
+
 export const InputAreaWrapper = styled.div`
   padding: 1rem;
   margin: 1rem;
@@ -10,6 +21,7 @@ export const InputAreaWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
 `;
 
 export const OutputAreaWrapper = styled.div`
@@ -17,4 +29,5 @@ export const OutputAreaWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-width: 1200px;
 `;

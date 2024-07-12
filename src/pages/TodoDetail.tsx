@@ -4,11 +4,15 @@ import Button from "@components/Button";
 import * as S from "@styles/pages/todoDetail.style";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTodoById } from "@/api/todos";
+import { ButtonWrapper } from "@styles/components/todo/todoForm.style";
+import useUser from "@/hooks/useUser";
 
 const TodoDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const todoId = id ? id : undefined;
+
+  const { id: userId } = useUser();
 
   const {
     data: todo,
@@ -32,8 +36,13 @@ const TodoDetail = () => {
       <S.DetailWrapper $isDone={todo.isDone ? "done" : "working"}>
         <S.Detail $isDone={todo.isDone ? "done" : "working"}>
           <S.DetailHeader>
-            <span>ID:{todo.id}</span>
-            <Button onClick={backPage}>뒤로가기</Button>
+            <S.DetailTodoInfo>
+              <span>작성자: {userId} 님</span>
+              <span>id:{todo.id}</span>
+            </S.DetailTodoInfo>
+            <ButtonWrapper>
+              <Button onClick={backPage}>뒤로가기</Button>
+            </ButtonWrapper>
           </S.DetailHeader>
           <S.DetailTodo>
             <h3>{todo.title}</h3>

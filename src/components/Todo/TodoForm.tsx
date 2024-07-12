@@ -131,9 +131,11 @@ export default function TodoForm() {
             name="content"
           />
         </S.InputContainer>
-        <Button type="submit" buttonTheme="btnAdd">
-          추가
-        </Button>
+        <S.ButtonWrapper>
+          <Button type="submit" buttonTheme="btnAdd">
+            추가
+          </Button>
+        </S.ButtonWrapper>
       </S.Form>
 
       {isVisible && (

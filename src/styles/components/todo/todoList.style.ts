@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface TodoListContainer {
-  $todoListType: "working" | "done";
+  $todoListType: "working" | "done" | "all";
 }
 
 export const TodoListTitle = styled.h2`
@@ -21,6 +21,8 @@ export const TodoListContainer = styled.div<TodoListContainer>`
         return theme.colors.whiteBlue;
       case "done":
         return theme.colors.whiteGreen;
+      case "all":
+        return theme.colors.lightGrey;
       default:
         return theme.colors.whiteBlue;
     }
