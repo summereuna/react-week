@@ -4,16 +4,24 @@ import * as S from "@styles/pages/myPage.style";
 import { fetchTodos } from "@/api/todos";
 import { useQuery } from "@tanstack/react-query";
 import { Todo } from "@/types";
+import useUser from "@/hooks/useUser";
 
 const MyTodos = () => {
-  //GET
+  const { id } = useUser();
+
   const {
-    data: todoList,
+    data: myTodoList,
     isPending,
     isError,
-  } = useQuery<Todo[], Error>({
+  } = useQuery({
     queryKey: ["todos"],
     queryFn: fetchTodos,
+    select: (data) => {
+      if (data) {
+        return data.filter((item: Todo) => item.userId === id);
+      }
+      return [];
+    },
   });
 
   if (isPending) {
@@ -25,15 +33,15 @@ const MyTodos = () => {
   }
 
   //isLoading보다 아래 있어야 오류 안남
-  const workingTodoList = todoList.filter((todo: Todo) => !todo.isDone);
-  const doneTodoList = todoList.filter((todo: Todo) => todo.isDone);
+  const workingTodoList = myTodoList.filter((todo: Todo) => !todo.isDone);
+  const doneTodoList = myTodoList.filter((todo: Todo) => todo.isDone);
 
   return (
     <>
+      <div>{id}님의 투두 리스트</div>
       <S.InputAreaWrapper>
         <TodoForm />
       </S.InputAreaWrapper>
-
       <S.OutputAreaWrapper>
         <TodoList
           todoList={workingTodoList}

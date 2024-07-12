@@ -2,10 +2,11 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "@pages/Home";
 import TodoDetail from "@pages/TodoDetail";
 import Layout from "@shared/Layout";
-import { useAppSelector } from "@/hooks/rtkHooks";
 import Login from "@pages/Login";
 import Signup from "@pages/Signup";
 import MyTodos from "@pages/MyTodos";
+import Todos from "@pages/Todos";
+import useAuth from "@/hooks/useAuth";
 // import DashBoardLayout from "@shared/DashBoardLayout";
 // import Like from "@pages/Like";
 
@@ -15,7 +16,7 @@ const PrivateRoute: React.FC<{ element: React.ElementType }> = ({
   element: Element,
   ...rest
 }) => {
-  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useAuth();
   return isLoggedIn ? <Element {...rest} /> : <Navigate to="/login" />;
 };
 
@@ -25,7 +26,7 @@ const PublicRoute: React.FC<{ element: React.ElementType }> = ({
   element: Element,
   ...rest
 }) => {
-  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useAuth();
   return !isLoggedIn ? <Element {...rest} /> : <Navigate to="/mypage" />;
 };
 
@@ -37,6 +38,7 @@ const Router = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<PublicRoute element={Login} />} />
           <Route path="/signup" element={<PublicRoute element={Signup} />} />
+          <Route path="/todos" element={<PrivateRoute element={Todos} />} />
           <Route path="/mypage" element={<PrivateRoute element={MyTodos} />} />
           <Route
             path="/mypage/:id"

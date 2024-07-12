@@ -27,8 +27,9 @@ const Login = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: authLogin,
-    onSuccess: (data) => {
-      dispatch(login(data.accessToken)); //리덕스 전역으로 토큰 저장
+    onSuccess: ({ userId, avatar, nickname, accessToken }) => {
+      const user = { id: userId, avatar, nickname };
+      dispatch(login({ accessToken, user })); //리덕스 전역으로 토큰 저장
       queryClient.invalidateQueries({ queryKey: ["authLogin"] });
       navigate("/mypage");
     },

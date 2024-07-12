@@ -1,10 +1,10 @@
-import { useAppDispatch, useAppSelector } from "@/hooks/rtkHooks";
+import { useAppDispatch } from "@/hooks/rtkHooks";
+import useAuth from "@/hooks/useAuth";
 import Button from "@components/Button";
 // import useModal from "@/hooks/useModal";
 // import ModalAlert from "@components/Modal/ModalAlert";
 // import ModalLayout from "@components/Modal/ModalLayout";
 // import ModalPortal from "@components/Modal/ModalPortal";
-import { RootState } from "@redux/config/configStore";
 import { logout } from "@redux/slices/authSlice";
 import * as S from "@styles/components/layout.style";
 import { useNavigate } from "react-router-dom";
@@ -16,10 +16,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const navigate = useNavigate();
 
-  const isLoggedIn = useAppSelector(
-    (state: RootState) => state.auth.isLoggedIn
-  );
-
+  const isLoggedIn = useAuth();
   const dispatch = useAppDispatch();
 
   // const { isVisible, openModal, closeModal } = useModal();

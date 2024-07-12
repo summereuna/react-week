@@ -11,6 +11,7 @@ import ModalAlert from "@components/Modal/ModalAlert";
 import { addTodo, fetchTodos } from "@/api/todos";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Todo } from "@/types";
+import useUser from "@/hooks/useUser";
 
 type ErrorParamsType = {
   title: string;
@@ -18,6 +19,7 @@ type ErrorParamsType = {
 };
 
 export default function TodoForm() {
+  const { id: userId } = useUser();
   //=============리액트 쿼리=============
   const queryClient = useQueryClient();
 
@@ -29,8 +31,6 @@ export default function TodoForm() {
   });
   //=============리액트 쿼리=============
   const { isVisible, openModal, closeModal } = useModal();
-  // const dispatch = useAppDispatch();
-  // const todoList = useAppSelector((state) => state.todos.todoList);
 
   const [todo, setTodo] = useState({ title: "", content: "" });
 
@@ -69,8 +69,7 @@ export default function TodoForm() {
         기 등록한 TODO ITEM의 수정을 원하시면
         해당 아이템의 [상세보기]-[수정]을 이용해주세요.`;
       default:
-        return `시스템 내부 오류가 발생하였습니다.
-        고객센터로 연락주세요.`;
+        return `시스템 내부 오류가 발생하였습니다.`;
     }
   };
 
@@ -103,9 +102,8 @@ export default function TodoForm() {
       return;
     }
 
-    // dispatch(addTodo(todo));
-
     const newTodo: Omit<Todo, "id"> = {
+      userId,
       title: todo.title,
       content: todo.content,
       isDone: false,

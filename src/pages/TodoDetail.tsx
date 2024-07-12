@@ -4,7 +4,6 @@ import Button from "@components/Button";
 import * as S from "@styles/pages/todoDetail.style";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTodoById } from "@/api/todos";
-import { Todo } from "@/types";
 
 const TodoDetail = () => {
   const navigate = useNavigate();
@@ -15,7 +14,7 @@ const TodoDetail = () => {
     data: todo,
     isPending,
     isError,
-  } = useQuery<Todo, Error>({
+  } = useQuery({
     queryKey: ["todo", todoId],
     queryFn: () => fetchTodoById(todoId as string),
     enabled: !!id, // id가 있을 때만 쿼리를 실행
