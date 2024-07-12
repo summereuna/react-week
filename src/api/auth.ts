@@ -4,14 +4,14 @@ import { User } from "@/types";
 // POST login
 export const authLogin = async (user: User) => {
   const response = await authApi.post(`/login`, user);
-  console.log(response);
+  // console.log(response);
   return response.data;
 };
 
 // POST login
 export const authRegister = async (user: User) => {
   const response = await authApi.post(`/register`, user);
-  console.log(response);
+  // console.log(response);
   return response.data;
 };
 
