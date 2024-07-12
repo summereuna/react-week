@@ -5,10 +5,12 @@ import { rightIcon } from "@shared/icons";
 import { CSIconS } from "@styles/components/icon.style";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteTodo, toggleTodo } from "@/api/todos";
-import { Todo } from "@/types";
+import useUser from "@/hooks/useUser";
+import { Todo as TodoType } from "@/types";
 
-export default function Todo({ id, title, content, isDone }: Todo) {
+export default function Todo({ id, userId, title, content, isDone }: TodoType) {
   const queryClient = useQueryClient();
+  const { id: authUserId } = useUser();
 
   // DELETE
   const { mutate: deleteMutate } = useMutation({
@@ -27,10 +29,12 @@ export default function Todo({ id, title, content, isDone }: Todo) {
   });
 
   const onDeleteTodoClick = (id: string) => {
+    if (userId !== authUserId) return;
     deleteMutate(id);
   };
 
   const onToggleClick = (id: string) => {
+    if (userId !== authUserId) return;
     toggleMutate(id);
   };
 

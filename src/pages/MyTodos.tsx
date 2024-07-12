@@ -6,7 +6,6 @@ import { fetchTodos } from "@/api/todos";
 import { useQuery } from "@tanstack/react-query";
 import { Todo } from "@/types";
 import useUser from "@/hooks/useUser";
-import styled from "styled-components";
 
 const MyTodos = () => {
   const { id } = useUser();
