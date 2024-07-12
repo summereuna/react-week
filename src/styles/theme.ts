@@ -42,10 +42,23 @@ const buttonShape = {
   },
 };
 
+const buttonSize = {
+  s: {
+    width: "inherit",
+  },
+  m: {
+    width: "5rem",
+  },
+  lg: {
+    width: "100%",
+  },
+};
+
 const theme = {
   colors,
   button,
   buttonShape,
+  buttonSize,
 };
 
 export default theme;

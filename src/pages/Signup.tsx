@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authRegister } from "@/api/auth";
+import Form from "@components/Form";
 
 const Signup = () => {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const [signUpUser, setSignUpUser] = useState({ ID: "", PASSWORD: "" });
+
+  const changeNewUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setSignUpUser({ ...signUpUser, [name]: value });
+  };
 
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
@@ -21,12 +27,12 @@ const Signup = () => {
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     try {
       const newUser = {
-        id,
-        password,
+        id: signUpUser.ID,
+        password: signUpUser.PASSWORD,
         nickname: "익명",
       };
 
@@ -38,24 +44,13 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <h2>Signup Page</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-          placeholder="ID"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button type="submit">Signup</button>
-      </form>
-    </div>
+    <Form
+      onChange={changeNewUser}
+      onSubmit={handleSubmit}
+      id={signUpUser.ID}
+      pw={signUpUser.PASSWORD}
+      isRegister={true}
+    />
   );
 };
 

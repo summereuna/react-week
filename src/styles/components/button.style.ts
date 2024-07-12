@@ -3,14 +3,15 @@ import styled, { css } from "styled-components";
 interface ButtonThemeProps {
   $buttonTheme?: "btnAdd" | "btnDelete" | "btnDone";
   $buttonShape?: "square" | "circle";
+  $buttonSize?: "s" | "m" | "lg";
 }
 
 export const Button = styled.button<ButtonThemeProps>`
-  //
+  /* //
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
   //
   border: ${({ theme }) => `1px solid ${theme.colors.grey}`};
   background-color: ${({ theme }) => theme.colors.lightGrey};
@@ -23,6 +24,12 @@ export const Button = styled.button<ButtonThemeProps>`
     css`
       border-radius: ${theme.buttonShape[$buttonShape]?.borderRadius};
       min-width: ${theme.buttonShape[$buttonShape]?.minWidth};
+    `};
+
+  ${({ $buttonSize, theme }) =>
+    $buttonSize &&
+    css`
+      width: ${theme.buttonSize[$buttonSize]?.width};
     `};
 
   &:hover,

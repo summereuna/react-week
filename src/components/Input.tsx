@@ -6,23 +6,28 @@ interface InputProps {
   value: string;
   label: string;
   name: string;
+  type?: string;
 }
 
-export default function Input({ onChange, value, label, name }: InputProps) {
+export default function Input({
+  onChange,
+  value,
+  label,
+  name,
+  type = "text",
+}: InputProps) {
   const { colors } = useTheme();
 
   return (
-    <S.InputWrapper>
-      <label htmlFor={name}>{label}</label>
-      <S.Input
-        value={value}
-        id={name}
-        name={name}
-        onChange={(e) => onChange(e)}
-        type="text"
-        theme={colors}
-        autoComplete="off"
-      />
-    </S.InputWrapper>
+    <S.Input
+      value={value}
+      id={name}
+      name={name}
+      onChange={(e) => onChange(e)}
+      type={type}
+      theme={colors}
+      placeholder={label}
+      autoComplete="off"
+    />
   );
 }

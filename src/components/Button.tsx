@@ -10,6 +10,7 @@ interface ButtonProps {
   type?: "button" | "submit";
   buttonTheme?: "btnAdd" | "btnDelete" | "btnDone";
   buttonShape?: "square" | "circle";
+  buttonSize?: "s" | "m" | "lg";
 }
 
 export default function Button({
@@ -19,6 +20,7 @@ export default function Button({
   type = "button",
   buttonTheme = "btnAdd",
   buttonShape = "square",
+  buttonSize = "s",
 }: ButtonProps) {
   return (
     <S.Button
@@ -26,6 +28,7 @@ export default function Button({
       onClick={onClick}
       $buttonTheme={buttonTheme}
       $buttonShape={buttonShape}
+      $buttonSize={buttonSize}
     >
       {icon ? <CSIconM>{icon}</CSIconM> : null}
       {children ? <div>{children}</div> : null}
