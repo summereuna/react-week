@@ -76,6 +76,20 @@
       "title": "Zustand 공부",
       "content": "리덕스 툴킷 대체! (클라이언트 상태 전역 관리)",
       "isDone": false
+    },
+    {
+      "id": "8dba",
+      "userId": "summereuna",
+      "title": "바질 페스토 만들기",
+      "content": "1. 바질 수확 2. 바질 씻기",
+      "isDone": false
+    },
+    {
+      "id": "2eb8",
+      "userId": "summereuna",
+      "title": "텃밭 관리",
+      "content": "1. 토마토 수확 2. 잡초 뽑기",
+      "isDone": false
     }
   ]
 }
