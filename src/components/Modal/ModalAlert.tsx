@@ -1,4 +1,4 @@
-import * as S from "@styles/components/modal/modalLayout.style";
+import * as S from "@styles/components/modal/modalAlret.style";
 
 interface ModalAlertProps {
   content: React.ReactNode;
