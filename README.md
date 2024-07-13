@@ -2,7 +2,7 @@
 
 - React 주특기 주차 Lv.4 과제
 - 정은화
-- [배포한 사이트: vercel](react-todo-list-five-tau.vercel.app)
+- [배포한 사이트: vercel](https://react-todo-list-five-tau.vercel.app)
 
 ## 📌 과제 개요
 
