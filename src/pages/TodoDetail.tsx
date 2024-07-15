@@ -5,14 +5,14 @@ import * as S from "@styles/pages/todoDetail.style";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTodoById } from "@/api/todos";
 import { ButtonWrapper } from "@styles/components/todo/todoForm.style";
-import useUser from "@/hooks/useUser";
+// import useUser from "@/hooks/useUser";
 
 const TodoDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const todoId = id ? id : undefined;
 
-  const { id: userId } = useUser();
+  // const { id: userId } = useUser();
 
   const {
     data: todo,
@@ -37,7 +37,7 @@ const TodoDetail = () => {
         <S.Detail $isDone={todo.isDone ? "done" : "working"}>
           <S.DetailHeader>
             <S.DetailTodoInfo>
-              <span>작성자: {userId} 님</span>
+              <span>작성자: {todo.userId} 님</span>
               <span>id:{todo.id}</span>
             </S.DetailTodoInfo>
             <ButtonWrapper>
