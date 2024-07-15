@@ -25,7 +25,7 @@ const Login = () => {
   };
 
   const queryClient = useQueryClient();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: authLogin,
     onSuccess: ({ userId, avatar, nickname, accessToken }) => {
       const user = { id: userId, avatar, nickname };
@@ -65,6 +65,7 @@ const Login = () => {
         id={loginUser.ID}
         pw={loginUser.PASSWORD}
         isRegister={false}
+        disabled={isPending}
       />
 
       {isVisible && (

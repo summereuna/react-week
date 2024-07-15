@@ -23,7 +23,7 @@ const Signup = () => {
   };
 
   const queryClient = useQueryClient();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: authRegister,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["authRegister"] });
@@ -63,6 +63,7 @@ const Signup = () => {
         id={signUpUser.ID}
         pw={signUpUser.PASSWORD}
         isRegister={true}
+        disabled={isPending}
       />
 
       {isVisible && (
