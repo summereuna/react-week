@@ -3,28 +3,37 @@ import styled from "styled-components";
 export const Form = styled.form`
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+  box-sizing: border-box;
 `;
 
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 70%; //나중에 플레서블하게 바꾸기.....✅
+  flex-wrap: wrap;
+
+  gap: 1rem;
+
+  width: 100%;
+
   input {
     height: 45px;
-    margin-right: 1rem;
+    width: 100%;
+    max-width: 450px;
   }
 `;
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  /* width: %; */
 
-  width: 20%;
+  /* justify-content: flex-end; */
   button {
+    /* width: 100%; */
     height: 45px;
   }
 `;

@@ -8,6 +8,7 @@ export const DetailWrapper = styled.div<DoneProps>`
   max-height: 100%;
   height: calc(100vh - 69px);
   width: 100%;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,7 +1,6 @@
 import TodoList from "@components/Todo/TodoList";
 import * as S from "@styles/pages/myPage.style";
 import { Todo } from "@/types";
-import { Wrapper } from "@styles/components/form.style";
 import useAllTodos from "@/hooks/useAllTodos";
 import Loading from "@components/Loading";
 import Error from "@components/Error";
@@ -13,7 +12,8 @@ const Todos = () => {
   const doneTodoList = todoList?.filter((todo: Todo) => todo.isDone);
 
   return (
-    <Wrapper>
+    // <TodosWrapper>
+    <>
       {isPending && <Loading message={`투두 리스트를\n불러오는 중이에요!`} />}
       {isError && (
         <Error
@@ -34,7 +34,8 @@ const Todos = () => {
           />
         </S.OutputAreaWrapper>
       )}
-    </Wrapper>
+    </>
+    // </TodosWrapper>
   );
 };
 

@@ -4,26 +4,28 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: calc(100vh - 69px);
 `;
 
 export const LoginFormContainer = styled.div`
-  margin: 3rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 0;
+  padding: 1rem;
+  margin: 1rem;
+  width: 100%;
   max-width: 460px;
-  min-width: 460px;
   border: 1px solid ${({ theme }) => theme.colors.grey};
   border-radius: 12px;
 `;
 
 export const AuthForm = styled.form`
+  width: 90%;
   display: grid;
   gap: 30px;
-  margin: 1rem;
 `;
 
 export const InputContainer = styled.div`
@@ -44,7 +46,7 @@ export const ButtonContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 400px;
+  max-width: 400px; //요놈
 
   button {
     font-size: medium;
