@@ -6,6 +6,7 @@ import * as S from "@styles/components/form.style";
 interface FormProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent) => Promise<void>;
+  disabled?: boolean;
   id: string;
   pw: string;
   isRegister: boolean;
@@ -14,6 +15,7 @@ interface FormProps {
 export default function Form({
   onChange,
   onSubmit,
+  disabled = false,
   id,
   pw,
   isRegister,
@@ -40,7 +42,7 @@ export default function Form({
             />
           </S.InputContainer>
           <S.ButtonContainer>
-            <Button type="submit" buttonSize="lg">
+            <Button type="submit" buttonSize="lg" disabled={disabled}>
               {isRegister ? `회원가입` : `로그인`}
             </Button>
             {isRegister ? (

@@ -23,17 +23,16 @@ const Signup = () => {
   };
 
   const queryClient = useQueryClient();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: authRegister,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["authRegister"] });
       navigate("/login");
     },
     onError: (error: unknown) => {
-      let errorMsg = "시스템 내부 오류가 발생했습니다.";
+      let errorMsg = "오류가 발생했습니다. 다시 회원가입을 시도해 주세요.";
       if (axios.isAxiosError(error) && error.response) {
-        errorMsg = `[${error.response.status}] 에러\n
-        ${error.response.data.message}`;
+        errorMsg = `${error.response.data.message}`;
       }
       setAlertContent(errorMsg);
       openModal();
@@ -64,6 +63,7 @@ const Signup = () => {
         id={signUpUser.ID}
         pw={signUpUser.PASSWORD}
         isRegister={true}
+        disabled={isPending}
       />
 
       {isVisible && (

@@ -6,7 +6,7 @@ interface DoneProps {
 
 export const DetailWrapper = styled.div<DoneProps>`
   max-height: 100%;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 69px);
   width: 100%;
   display: flex;
   flex-direction: column;

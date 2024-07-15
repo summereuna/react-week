@@ -13,7 +13,7 @@ export default function AllTodoItem({
 }: Todo) {
   return (
     <S.TodoWrapper
-      id={id} // div 요소의 id 속성은 문자열이어야 함 > 걍 다 문자열로 통일 ^^~~ 혹시 나중에 서버 바꿔서 uuid 쓸거 생각하면
+      id={id} //문자열
       $isDone={`${isDone ? "done" : "working"}`}
     >
       <S.TodoContentContainer>

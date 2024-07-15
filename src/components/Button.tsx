@@ -7,6 +7,7 @@ interface ButtonProps {
   children?: React.ReactNode;
   icon?: React.ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
   type?: "button" | "submit";
   buttonTheme?: "btnAdd" | "btnDelete" | "btnDone";
   buttonShape?: "square" | "circle";
@@ -17,6 +18,7 @@ export default function Button({
   children,
   icon,
   onClick,
+  disabled = false,
   type = "button",
   buttonTheme = "btnAdd",
   buttonShape = "square",
@@ -26,6 +28,7 @@ export default function Button({
     <S.Button
       type={type}
       onClick={onClick}
+      disabled={disabled}
       $buttonTheme={buttonTheme}
       $buttonShape={buttonShape}
       $buttonSize={buttonSize}
