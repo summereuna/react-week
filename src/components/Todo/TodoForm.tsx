@@ -8,10 +8,9 @@ import ModalLayout from "@components/Modal/ModalLayout";
 import ModalAlert from "@components/Modal/ModalAlert";
 // import { useAppDispatch, useAppSelector } from "@/hooks/rtkHooks";
 // import { v4 as uuidv4 } from "uuid";
-import { addTodo, fetchTodos } from "@/api/todos";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Todo } from "@/types";
 import useUser from "@/hooks/useUser";
+import useCreateTodo from "@/hooks/useCreateTodo";
 
 type ErrorParamsType = {
   title: string;
@@ -19,19 +18,10 @@ type ErrorParamsType = {
 };
 
 export default function TodoForm() {
+  const { createTodo } = useCreateTodo();
+
   const { id: userId } = useUser();
-  //=============리액트 쿼리=============
-  const queryClient = useQueryClient();
-
-  const { mutate } = useMutation({
-    mutationFn: addTodo,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
-    },
-  });
-  //=============리액트 쿼리=============
   const { isVisible, openModal, closeModal } = useModal();
-
   const [todo, setTodo] = useState({ title: "", content: "" });
 
   const changeTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,19 +29,19 @@ export default function TodoForm() {
     setTodo({ ...todo, [name]: value });
   };
 
-  const { data: validationData } = useQuery({
-    queryKey: ["todoList"],
-    queryFn: fetchTodos,
-    select: (data) => {
-      if (data) {
-        return data.filter(
-          (item: Todo) =>
-            item.title === todo.title && item.content === todo.content
-        );
-      }
-      return [];
-    },
-  });
+  // const { data: validationData } = useQuery({
+  //   queryKey: ["todos"],
+  //   queryFn: fetchTodos,
+  //   select: (data) => {
+  //     if (data) {
+  //       return data.filter(
+  //         (item: Todo) =>
+  //           item.title === todo.title && item.content === todo.content
+  //       );
+  //     }
+  //     return [];
+  //   },
+  // });
 
   // 에러 메시지 발생 함수
   const getErrorMsg = (errorCode: string, params: ErrorParamsType): string => {
@@ -62,12 +52,12 @@ export default function TodoForm() {
         [입력된 값]
         제목 : ${params.title}
         내용 : ${params.content}`;
-      case "02":
-        return `[내용 중복 안내]\n
-        입력하신 제목(${params.title}) 및 내용(${params.content})과 일치하는 TODO가
-        이미 TODO LIST에 등록되어 있습니다.\n
-        기 등록한 TODO ITEM의 수정을 원하시면
-        해당 아이템의 [상세보기]-[수정]을 이용해주세요.`;
+      // case "02":
+      //   return `[내용 중복 안내]\n
+      //   입력하신 제목(${params.title}) 및 내용(${params.content})과 일치하는 TODO가
+      //   이미 TODO LIST에 등록되어 있습니다.\n
+      //   기 등록한 TODO ITEM의 수정을 원하시면
+      //   해당 아이템의 [상세보기]-[수정]을 이용해주세요.`;
       default:
         return `시스템 내부 오류가 발생하였습니다.`;
     }
@@ -91,16 +81,16 @@ export default function TodoForm() {
     }
 
     // 이미 존재하는 todo 항목이면 오류
-    // "02" : 내용 중복 안내
-    if (validationData!.length > 0) {
-      const errorMsg = getErrorMsg("02", {
-        title: todo.title,
-        content: todo.content,
-      });
-      setAlertContent(errorMsg);
-      openModal();
-      return;
-    }
+    // // "02" : 내용 중복 안내
+    // if (validationData!.length > 0) {
+    //   const errorMsg = getErrorMsg("02", {
+    //     title: todo.title,
+    //     content: todo.content,
+    //   });
+    //   setAlertContent(errorMsg);
+    //   openModal();
+    //   return;
+    // }
 
     const newTodo: Omit<Todo, "id"> = {
       userId,
@@ -109,7 +99,7 @@ export default function TodoForm() {
       isDone: false,
     };
 
-    mutate(newTodo);
+    createTodo(newTodo);
 
     setTodo({ title: "", content: "" });
   };
