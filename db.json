@@ -68,7 +68,7 @@
       "userId": "eueu",
       "title": "lv.4 개인 과제 제출",
       "content": "회원가입, 로그인 구현",
-      "isDone": false
+      "isDone": true
     },
     {
       "id": "e0ae",
@@ -89,6 +89,13 @@
       "userId": "summereuna",
       "title": "텃밭 관리",
       "content": "1. 토마토 수확 2. 잡초 뽑기",
+      "isDone": false
+    },
+    {
+      "id": "0f7f",
+      "userId": "eueu",
+      "title": "리액트 공부",
+      "content": "lv5 과제",
       "isDone": false
     }
   ]

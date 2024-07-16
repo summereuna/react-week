@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { authLogin } from "@/api/auth";
 import { useAppDispatch } from "@/hooks/rtkHooks";
 import { login } from "@redux/slices/authSlice";
@@ -10,6 +10,7 @@ import ModalPortal from "@components/Modal/ModalPortal";
 import ModalLayout from "@components/Modal/ModalLayout";
 import ModalAlert from "@components/Modal/ModalAlert";
 import axios from "axios";
+import { setCookie } from "@/utils/cookie";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,13 +25,28 @@ const Login = () => {
     setLoginUser({ ...loginUser, [name]: value });
   };
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationFn: authLogin,
     onSuccess: ({ userId, avatar, nickname, accessToken }) => {
+      //브라우저 쿠키에 accessToken 저장
+
+      if (accessToken) {
+        setCookie("accessToken", accessToken, {
+          path: "/",
+          secure: true,
+          sameSite: "lax",
+          maxAge: 3600, //1시간 (s)
+          //만료 시간을 UTC 기준으로 표시하기 때문에 KST 보다 -9시간이긴 하지만 기능상 문제는 없음
+        });
+      }
+      //리덕스 전역으로 유저 정보 저장
       const user = { id: userId, avatar, nickname };
-      dispatch(login({ accessToken, user })); //리덕스 전역으로 토큰 저장
-      queryClient.invalidateQueries({ queryKey: ["authLogin"] });
+      dispatch(login({ user }));
+      //상태무효화 상태 refresh
+      //이건 필요 없는 것 같기도 하다..
+      // queryClient.invalidateQueries({ queryKey: ["authLogin"] });
+      //페이지 이동
       navigate("/mypage");
     },
     onError: (error: unknown) => {
@@ -52,8 +68,8 @@ const Login = () => {
       };
       mutate(newLoginUser);
     } catch (error) {
-      console.error("로그인 실패:", error);
-      alert("로그인 실패");
+      setAlertContent("오류가 발생했습니다.\n로그인을 다시 시도해 주세요.");
+      openModal();
     }
   };
 

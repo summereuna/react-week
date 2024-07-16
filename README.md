@@ -25,12 +25,42 @@
 - 로그인을 이미 한 경우 `로그인/회원가입` 페이지는 접근 할 수 없습니다.
 - 로그아웃 기능을 구현합니다.
 
-### 📝 내 구현 방식
+### 📝 구현 방식
 
-- Todo data 서버 사이드 전역 상태 관리: TanStackQuery, axios, json-server
-  - json-server => 무료 사용 가능해서 glitch로 json 배포
-- Auth, User data 클라이언트 사이드 전역 상태 관리: Redux Tool Kit, axios, JWT, Local Storage, `https://moneyfulpublicpolicy.co.kr` api
-  - vercel 배포
+사용자 인증/인가 (JWT 관리: LocalStorage => Cookie로 변경)
+
+#### 1. 왜 LocalStorage에서 관리하던 것을 Cookie에서 관리하는 것으로 변경했는지?
+
+- 연습하려고 변경해 봤다. 솔직히 현재 사용하는 서버 api가 refreshToken을 같이 주는 것도 아니라서, 로컬스토리지나 쿠키나 어딜 넣든 보안상 문제는 다 있는 것 같다. 😓
+- 그래서 refreshToken이 있는 경우를 대비해 연습하려고 쿠키로 전환했다. 기술 매니저님께 여쭤보니 보통은 JWT를 쿠키에 담아서 많이들 사용한다고 하신 영향도 있다.
+
+#### 2. Todo data
+
+- 서버 사이드 전역 상태 관리:
+  - axios
+  - json-server
+    - json-server => 무료 사용 가능해서 glitch로 json 배포
+  - TanStackQuery
+
+#### 3. User data
+
+- 클라이언트 사이드 전역 상태 관리 및 로컬 스토리지에서 관리:
+  - axios
+  - `https://moneyfulpublicpolicy.co.kr` api
+  - Local Storage
+  - Redux Tool Kit
+
+#### 4. JWT 토큰 (accessToken만 있음)
+
+- 쿠키에서 관리:
+  - axios
+  - `https://moneyfulpublicpolicy.co.kr` api
+  - cookie
+
+#### 5. vercel 배포
+
+#### 6. 추가 사항
+
 - 과제 조건에서는 로그인을 하지 않은 경우에는 `로그인/회원가입` 페이지만 접근 가능하다고 제시되어 있는데, 만든 웹 앱 조건 상 메인 화면은 보여도 될 것 같아서 일단 퍼블릭 페이지로 만들었다. 대신, 로그인하지 않은 채, 다른 페이지로 이동하려고 할 때, 로그인을 할 수 있도록 모달 알람을 띄운 후 로그인 페이지로 navigate 했다.
 
 ## ✍️ 질문에 대한 답변
