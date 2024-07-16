@@ -6,12 +6,19 @@ import { Todo } from "@/types";
 import useMyTodos from "@/hooks/useMyTodos";
 import Error from "@components/Error";
 import Loading from "@components/Loading";
+import Button from "@components/Button";
+import { useNavigate } from "react-router-dom";
 
 const MyTodos = () => {
   const { myTodoList, isPending, isError, isSuccess, userId } = useMyTodos();
 
   const workingTodoList = myTodoList?.filter((todo: Todo) => !todo.isDone);
   const doneTodoList = myTodoList?.filter((todo: Todo) => todo.isDone);
+
+  const navigate = useNavigate();
+  const handleGoTodoAdd = () => {
+    navigate("/todos/add");
+  };
 
   return (
     <Wrapper>
@@ -24,9 +31,12 @@ const MyTodos = () => {
       {isSuccess && (
         <S.MyTodosWrapper>
           <S.MyTodosTitle>{`💬 ${userId}님의 투두 리스트`}</S.MyTodosTitle>
-          {/* <S.InputAreaWrapper>
-            <TodoForm />
-          </S.InputAreaWrapper> */}
+          {/* <S.ProfileAreaWrapper>
+            <S.Avatar></S.Avatar>
+          </S.ProfileAreaWrapper> */}
+          <S.ButtonWrpper>
+            <Button onClick={handleGoTodoAdd}>새로운 투두 만들기</Button>
+          </S.ButtonWrpper>
           <S.OutputAreaWrapper>
             <TodoList
               todoList={workingTodoList}
