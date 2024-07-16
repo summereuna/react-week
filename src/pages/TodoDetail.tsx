@@ -4,7 +4,6 @@ import Button from "@components/Button";
 import * as S from "@styles/pages/todoDetail.style";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTodoById } from "@/api/todos";
-import { ButtonWrapper } from "@styles/components/todo/todoForm.style";
 // import useUser from "@/hooks/useUser";
 
 const TodoDetail = () => {
