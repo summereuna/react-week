@@ -8,6 +8,7 @@ export const DetailWrapper = styled.div<DoneProps>`
   max-height: 100%;
   height: calc(100vh - 69px);
   width: 100%;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,12 +42,17 @@ export const Detail = styled.div<DoneProps>`
     switch ($isDone) {
       case "done":
         return `1px solid ${theme.colors.green}`;
-      //`1px solid rgb(72, 255, 62);`;
       default:
         return `1px solid ${theme.colors.blue}`;
-      //`1px solid rgb(62, 149, 255);`;
     }
   }};
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  button {
+    height: 45px;
+  }
 `;
 
 export const DetailHeader = styled.div`

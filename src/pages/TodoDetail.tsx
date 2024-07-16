@@ -4,7 +4,6 @@ import Button from "@components/Button";
 import * as S from "@styles/pages/todoDetail.style";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTodoById } from "@/api/todos";
-import { ButtonWrapper } from "@styles/components/todo/todoForm.style";
 // import useUser from "@/hooks/useUser";
 
 const TodoDetail = () => {
@@ -40,9 +39,9 @@ const TodoDetail = () => {
               <span>작성자: {todo.userId} 님</span>
               <span>id:{todo.id}</span>
             </S.DetailTodoInfo>
-            <ButtonWrapper>
+            <S.ButtonWrapper>
               <Button onClick={backPage}>뒤로가기</Button>
-            </ButtonWrapper>
+            </S.ButtonWrapper>
           </S.DetailHeader>
           <S.DetailTodo>
             <h3>{todo.title}</h3>

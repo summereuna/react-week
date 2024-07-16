@@ -3,9 +3,10 @@ import styled from "styled-components";
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 5rem;
-  height: 85vh;
+  height: calc(100vh - 69px);
+  width: 100%;
 `;
 
 export const AboutContainer = styled.div`
@@ -16,4 +17,5 @@ export const AboutContainer = styled.div`
   justify-content: center;
   padding: 1rem;
   width: 100%;
+  gap: 1rem;
 `;

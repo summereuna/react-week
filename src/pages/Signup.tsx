@@ -30,7 +30,7 @@ const Signup = () => {
       navigate("/login");
     },
     onError: (error: unknown) => {
-      let errorMsg = "오류가 발생했습니다. 다시 회원가입을 시도해 주세요.";
+      let errorMsg = "오류가 발생했습니다.\n회원가입을 다시 시도해 주세요.";
       if (axios.isAxiosError(error) && error.response) {
         errorMsg = `${error.response.data.message}`;
       }

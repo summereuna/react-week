@@ -16,11 +16,13 @@ export const Dialog = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 12px;
-  box-sizing: border-box;
   padding: 24px;
   background-color: rgb(255, 255, 255);
-  width: 500px;
-  height: 300px;
+  width: 90%;
+  max-width: 460px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
   z-index: 20;
 `;
 export const DialogButtonWrapper = styled.div`
@@ -29,8 +31,10 @@ export const DialogButtonWrapper = styled.div`
 `;
 
 export const DialogContentWrapper = styled.div`
+  box-sizing: border-box;
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
+  align-content: center;
+  justify-content: center;
 `;

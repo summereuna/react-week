@@ -1,4 +1,4 @@
-import TodoForm from "@components/Todo/TodoForm";
+// import TodoForm from "@components/Todo/TodoForm";
 import TodoList from "@components/Todo/TodoList";
 import { Wrapper } from "@styles/components/form.style";
 import * as S from "@styles/pages/myPage.style";
@@ -24,9 +24,9 @@ const MyTodos = () => {
       {isSuccess && (
         <S.MyTodosWrapper>
           <S.MyTodosTitle>{`💬 ${userId}님의 투두 리스트`}</S.MyTodosTitle>
-          <S.InputAreaWrapper>
+          {/* <S.InputAreaWrapper>
             <TodoForm />
-          </S.InputAreaWrapper>
+          </S.InputAreaWrapper> */}
           <S.OutputAreaWrapper>
             <TodoList
               todoList={workingTodoList}
