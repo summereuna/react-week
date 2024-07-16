@@ -75,3 +75,7 @@ export const DetailTodo = styled.div`
   padding: 1rem;
   height: 100%;
 `;
+
+export const DetailTodoContent = styled.div`
+  white-space: pre-line;
+`;

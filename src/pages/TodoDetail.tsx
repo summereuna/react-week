@@ -4,6 +4,7 @@ import Button from "@components/Button";
 import * as S from "@styles/pages/todoDetail.style";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTodoById } from "@/api/todos";
+import formatNewLineText from "@/utils/formatNewLineText";
 // import useUser from "@/hooks/useUser";
 
 const TodoDetail = () => {
@@ -45,7 +46,9 @@ const TodoDetail = () => {
           </S.DetailHeader>
           <S.DetailTodo>
             <h3>{todo.title}</h3>
-            <p>{todo.content}</p>
+            <S.DetailTodoContent>
+              {formatNewLineText(todo.content)}
+            </S.DetailTodoContent>
           </S.DetailTodo>
         </S.Detail>
       </S.DetailWrapper>

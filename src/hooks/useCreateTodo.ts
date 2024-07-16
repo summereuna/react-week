@@ -4,14 +4,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 const useCreateTodo = () => {
   const queryClient = useQueryClient();
 
-  const { mutate: createTodo } = useMutation({
+  const { mutate: createTodo, isPending } = useMutation({
     mutationFn: addTodo,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
 
-  return { createTodo };
+  return { createTodo, isPending };
 };
 
 export default useCreateTodo;

@@ -18,7 +18,7 @@ type ErrorParamsType = {
 
 export default function TodoForm() {
   const navigate = useNavigate();
-  const { createTodo } = useCreateTodo();
+  const { createTodo, isPending } = useCreateTodo();
 
   const { id: userId } = useUser();
   const { isVisible, openModal, closeModal } = useModal();
@@ -105,7 +105,10 @@ export default function TodoForm() {
     createTodo(newTodo);
 
     setTodo({ title: "", content: "" });
-    navigate("/mypage");
+
+    if (!isPending) {
+      navigate("/mypage");
+    }
   };
 
   return (
