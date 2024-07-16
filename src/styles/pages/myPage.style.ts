@@ -10,22 +10,21 @@ export const MyTodosWrapper = styled.div`
 export const MyTodosTitle = styled.div`
   font-size: x-large;
   font-weight: 600;
-  margin-top: 2rem;
   padding-left: 1rem;
 `;
 
-export const InputAreaWrapper = styled.div`
-  padding: 1rem;
-  margin: 1rem;
-  background-color: white;
-  border: ${({ theme }) => `1px solid ${theme.colors.blue}`};
-  border-radius: 10px;
-  /* display: flex; */
-  /* flex-wrap: wrap; */
-  /* flex-direction: row; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
-`;
+// export const InputAreaWrapper = styled.div`
+//   padding: 1rem;
+//   margin: 1rem;
+//   background-color: white;
+//   border: ${({ theme }) => `1px solid ${theme.colors.blue}`};
+//   border-radius: 10px;
+//   /* display: flex; */
+//   /* flex-wrap: wrap; */
+//   /* flex-direction: row; */
+//   /* justify-content: space-between; */
+//   /* align-items: center; */
+// `;
 
 export const OutputAreaWrapper = styled.div`
   padding: 1rem 0;

@@ -40,9 +40,9 @@ const TodoDetail = () => {
               <span>작성자: {todo.userId} 님</span>
               <span>id:{todo.id}</span>
             </S.DetailTodoInfo>
-            <ButtonWrapper>
+            <S.ButtonWrapper>
               <Button onClick={backPage}>뒤로가기</Button>
-            </ButtonWrapper>
+            </S.ButtonWrapper>
           </S.DetailHeader>
           <S.DetailTodo>
             <h3>{todo.title}</h3>

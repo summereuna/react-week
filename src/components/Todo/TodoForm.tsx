@@ -1,16 +1,15 @@
 import { useState } from "react";
 import Input from "@components/Input";
 import Button from "@components/Button";
-import * as S from "@styles/components/todo/todoForm.style";
 import useModal from "@/hooks/useModal";
 import ModalPortal from "@components/Modal/ModalPortal";
 import ModalLayout from "@components/Modal/ModalLayout";
 import ModalAlert from "@components/Modal/ModalAlert";
-// import { useAppDispatch, useAppSelector } from "@/hooks/rtkHooks";
-// import { v4 as uuidv4 } from "uuid";
 import { Todo } from "@/types";
 import useUser from "@/hooks/useUser";
 import useCreateTodo from "@/hooks/useCreateTodo";
+import * as S from "@styles/pages/todoAdd.style";
+import { useNavigate } from "react-router-dom";
 
 type ErrorParamsType = {
   title: string;
@@ -18,15 +17,19 @@ type ErrorParamsType = {
 };
 
 export default function TodoForm() {
+  const navigate = useNavigate();
   const { createTodo } = useCreateTodo();
 
   const { id: userId } = useUser();
   const { isVisible, openModal, closeModal } = useModal();
   const [todo, setTodo] = useState({ title: "", content: "" });
 
-  const changeTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setTodo({ ...todo, [name]: value });
+  const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTodo({ ...todo, title: e.target.value });
+  };
+
+  const changeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTodo({ ...todo, content: e.target.value });
   };
 
   // const { data: validationData } = useQuery({
@@ -102,31 +105,39 @@ export default function TodoForm() {
     createTodo(newTodo);
 
     setTodo({ title: "", content: "" });
+    navigate("/mypage");
   };
 
   return (
     <>
-      <S.Form onSubmit={onAddTodoClick}>
-        <S.InputContainer>
-          <Input
-            onChange={changeTodo}
-            value={todo.title}
-            label="제목"
-            name="title"
-          />
-          <Input
-            onChange={changeTodo}
-            value={todo.content}
-            label="내용"
-            name="content"
-          />
-        </S.InputContainer>
-        <S.ButtonWrapper>
-          <Button type="submit" buttonTheme="btnAdd">
-            추가
-          </Button>
-        </S.ButtonWrapper>
-      </S.Form>
+      <S.Wrapper>
+        <S.TodoFormContainer>
+          <h2>투두 추가하기</h2>
+          <S.Form onSubmit={onAddTodoClick}>
+            <S.InputContainer>
+              <Input
+                onChange={changeInput}
+                value={todo.title}
+                label="제목을 입력해주세요. (50자 이내)"
+                name="title"
+                maxLength={50}
+              />
+              <S.TextArea
+                onChange={changeTextArea}
+                value={todo.content}
+                placeholder="내용을 입력해 주세요. (200자 이내)"
+                name="content"
+                maxLength={200}
+              />
+            </S.InputContainer>
+            <S.ButtonWrapper>
+              <Button type="submit" buttonTheme="btnAdd">
+                추가
+              </Button>
+            </S.ButtonWrapper>
+          </S.Form>
+        </S.TodoFormContainer>
+      </S.Wrapper>
 
       {isVisible && (
         <ModalPortal>

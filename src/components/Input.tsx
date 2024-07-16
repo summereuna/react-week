@@ -1,4 +1,3 @@
-import { useTheme } from "styled-components";
 import * as S from "@styles/components/input.style";
 
 interface InputProps {
@@ -7,6 +6,7 @@ interface InputProps {
   label: string;
   name: string;
   type?: string;
+  maxLength?: number;
 }
 
 export default function Input({
@@ -15,9 +15,8 @@ export default function Input({
   label,
   name,
   type = "text",
+  maxLength = 20,
 }: InputProps) {
-  const { colors } = useTheme();
-
   return (
     <S.Input
       value={value}
@@ -25,9 +24,9 @@ export default function Input({
       name={name}
       onChange={(e) => onChange(e)}
       type={type}
-      theme={colors}
       placeholder={label}
       autoComplete="off"
+      maxLength={maxLength}
     />
   );
 }

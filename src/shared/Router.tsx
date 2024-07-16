@@ -7,6 +7,7 @@ import Signup from "@pages/Signup";
 import MyTodos from "@pages/MyTodos";
 import Todos from "@pages/Todos";
 import useAuth from "@/hooks/useAuth";
+import TodoAdd from "@pages/TodoAdd";
 // import DashBoardLayout from "@shared/DashBoardLayout";
 // import Like from "@pages/Like";
 
@@ -40,6 +41,10 @@ const Router = () => {
           <Route path="/signup" element={<PublicRoute element={Signup} />} />
           <Route path="/mypage" element={<PrivateRoute element={MyTodos} />} />
           <Route path="/todos" element={<PrivateRoute element={Todos} />} />
+          <Route
+            path="/todos/add"
+            element={<PrivateRoute element={TodoAdd} />}
+          />
           <Route
             path="/todos/:id"
             element={<PrivateRoute element={TodoDetail} />}

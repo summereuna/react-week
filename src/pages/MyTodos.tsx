@@ -24,9 +24,9 @@ const MyTodos = () => {
       {isSuccess && (
         <S.MyTodosWrapper>
           <S.MyTodosTitle>{`💬 ${userId}님의 투두 리스트`}</S.MyTodosTitle>
-          <S.InputAreaWrapper>
+          {/* <S.InputAreaWrapper>
             <TodoForm />
-          </S.InputAreaWrapper>
+          </S.InputAreaWrapper> */}
           <S.OutputAreaWrapper>
             <TodoList
               todoList={workingTodoList}
