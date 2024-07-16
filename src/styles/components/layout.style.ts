@@ -24,6 +24,19 @@ export const Header = styled.header`
   }
 `;
 
+export const LinkContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    align-items: flex-end;
+    display: none;
+  }
+`;
+
 export const Main = styled.main`
   display: flex;
   align-items: center;
