@@ -1,5 +1,6 @@
 import TodoList from "@components/Todo/TodoList";
 import * as S from "@styles/pages/myPage.style";
+import { Wrapper } from "@styles/components/form.style";
 import { Todo } from "@/types";
 import useAllTodos from "@/hooks/useAllTodos";
 import Loading from "@components/Loading";
@@ -12,8 +13,7 @@ const Todos = () => {
   const doneTodoList = todoList?.filter((todo: Todo) => todo.isDone);
 
   return (
-    // <TodosWrapper>
-    <>
+    <Wrapper>
       {isPending && <Loading message={`투두 리스트를\n불러오는 중이에요!`} />}
       {isError && (
         <Error
@@ -21,21 +21,24 @@ const Todos = () => {
         />
       )}
       {isSuccess && (
-        <S.OutputAreaWrapper>
-          <TodoList
-            todoList={workingTodoList}
-            todoListType={"all"}
-            cardsTitle="🔥 해야 할 투두 리스트"
-          />
-          <TodoList
-            todoList={doneTodoList}
-            todoListType={"all"}
-            cardsTitle="✅ 완료한 투두 리스트"
-          />
-        </S.OutputAreaWrapper>
+        <S.MyTodosWrapper>
+          <S.MyTodosTitle>{`👀 투두 리스트 모아보기`}</S.MyTodosTitle>
+
+          <S.OutputAreaWrapper>
+            <TodoList
+              todoList={workingTodoList}
+              todoListType={"all"}
+              cardsTitle="🔥 해야 할 투두 리스트"
+            />
+            <TodoList
+              todoList={doneTodoList}
+              todoListType={"all"}
+              cardsTitle="✅ 완료한 투두 리스트"
+            />
+          </S.OutputAreaWrapper>
+        </S.MyTodosWrapper>
       )}
-    </>
-    // </TodosWrapper>
+    </Wrapper>
   );
 };
 
