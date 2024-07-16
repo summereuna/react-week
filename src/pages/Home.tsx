@@ -5,13 +5,15 @@ import ModalPortal from "@components/Modal/ModalPortal";
 import ModalLayout from "@components/Modal/ModalLayout";
 import ModalAlert from "@components/Modal/ModalAlert";
 import Card from "@components/Card";
+import { getCookie } from "@/utils/cookie";
 
 const Home = () => {
   const navigate = useNavigate();
   const { isVisible, openModal, closeModal } = useModal();
 
   const handleClick = () => {
-    const token = localStorage.getItem("accessToken");
+    const token = getCookie("accessToken");
+    //쿠키 안에 토큰 없으면 로그인 페이지로 안내
     if (!token) {
       return openModal();
     }

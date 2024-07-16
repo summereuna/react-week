@@ -3,7 +3,6 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export type AuthState = {
   isLoggedIn: boolean;
-  accessToken?: string | undefined;
   user: {
     id: string;
     nickname: string;
@@ -11,15 +10,16 @@ export type AuthState = {
   };
 };
 
-const accessToken = localStorage.getItem("accessToken");
-const userId = localStorage.getItem("userId"); //일단 얘도 추가 로그인 안풀리게
+//초기값 설정
+//쿠키로 해도되고 로컬스토리지에 저장된 USER_ID로 해도 되고
+//토큰의 만료 시간이 끝나지 않은 경우 + 로컬 스토리지에 해당 아이디 저장되어 있다면 앱 새고해도 로그인 상태를 유지
+const userId = localStorage.getItem("USER_ID");
 
 const initialState: AuthState = {
-  isLoggedIn: !!accessToken, //원래는 이니셜로 false 주는게 맞는데 로컬에 토큰 남아있는 경우 로그인 유지 위해 ㅇㅇ
-  accessToken: accessToken!, //undefined 인데 마찬가지로
+  isLoggedIn: !!userId, //로컬스토리지에 있는 유저 아이디 불리언 값으로 체크
   user: {
-    id: userId!, //얘도
-    nickname: "익명", //얘네 둘은 나중에
+    id: userId!,
+    nickname: "익명",
     avatar: null,
   },
 };
@@ -28,24 +28,16 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login: (
-      state,
-      action: PayloadAction<{ accessToken: string; user: AuthState["user"] }>
-    ) => {
-      const accessToken = action.payload.accessToken;
+    login: (state, action: PayloadAction<{ user: AuthState["user"] }>) => {
       state.isLoggedIn = true;
-      state.accessToken = accessToken;
-      localStorage.setItem("accessToken", accessToken);
       const user = action.payload.user;
       state.user = user;
-      localStorage.setItem("userId", user.id);
+      localStorage.setItem("USER_ID", user.id);
     },
     logout: (state) => {
       state.isLoggedIn = false;
-      state.accessToken = undefined;
-      localStorage.removeItem("accessToken");
       state.user = initialState.user;
-      localStorage.removeItem("userId");
+      localStorage.removeItem("USER_ID");
     },
   },
 });
