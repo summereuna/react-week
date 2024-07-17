@@ -8,14 +8,13 @@ import formatNewLineText from "@/utils/formatNewLineText";
 import Error from "@components/Error";
 import Loading from "@components/Loading";
 import Comments from "@components/Comments";
-// import useUser from "@/hooks/useUser";
+import useUser from "@/hooks/useUser";
 
 const TodoDetail = () => {
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
-  const todoId = id ? id : undefined;
+  const { id: todoId } = useParams<{ id: string }>();
 
-  // const { id: userId } = useUser();
+  const { id: userId } = useUser();
 
   const {
     data: todo,
@@ -25,7 +24,7 @@ const TodoDetail = () => {
   } = useQuery({
     queryKey: ["todo", todoId],
     queryFn: () => fetchTodoById(todoId as string),
-    enabled: !!id, // id가 있을 때만 쿼리를 실행
+    enabled: !!todoId, // id가 있을 때만 쿼리를 실행
   });
 
   const backPage = () => {
@@ -33,7 +32,7 @@ const TodoDetail = () => {
   };
 
   const goToEditPage = () => {
-    navigate(`/todos/${id}/edit`);
+    navigate(`/todos/${todoId}/edit`);
   };
   return (
     <>
@@ -54,7 +53,6 @@ const TodoDetail = () => {
               <S.DetailTodoInfo>
                 <h3>{todo.title}</h3>
                 <span>{todo.userId} 님</span>
-                {/* <span>id:{todo.id}</span> */}
               </S.DetailTodoInfo>
               <S.ButtonWrapper>
                 {todo.isDone ? null : (
@@ -70,7 +68,7 @@ const TodoDetail = () => {
                 {formatNewLineText(todo.content)}
               </S.DetailTodoContent>
             </S.DetailTodo>
-            <Comments />
+            <Comments todoId={todoId!} userId={userId} />
           </S.Detail>
         </S.DetailWrapper>
       )}

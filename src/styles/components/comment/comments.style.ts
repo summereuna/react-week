@@ -7,13 +7,6 @@ export const CommentsContainer = styled.div`
   padding: 2rem;
 `;
 
-export const Title = styled.div`
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
-  padding-bottom: 0.5rem;
-  width: 100%;
-  display: flex;
-`;
-
 export const CommentListWrapper = styled.div`
   margin-bottom: 2rem;
 `;

@@ -11,11 +11,6 @@ import useCreateTodo from "@/hooks/useCreateTodo";
 import * as S from "@styles/pages/todoAdd.style";
 import { useNavigate } from "react-router-dom";
 
-type ErrorParamsType = {
-  title: string;
-  content: string;
-};
-
 interface TodoFormProps {
   data?: Todo;
   onEditTodoClick?: (updatedTodo: Todo) => void;
@@ -48,20 +43,6 @@ export default function TodoForm({ data, onEditTodoClick }: TodoFormProps) {
     });
   };
 
-  // 에러 메시지 발생 함수
-  const getErrorMsg = (errorCode: string, params: ErrorParamsType): string => {
-    switch (errorCode) {
-      case "01":
-        return `[필수 입력 값 검증 실패 안내]\n
-        제목과 내용은 모두 입력돼야 합니다. 입력값을 확인해주세요.\n
-        [입력된 값]
-        제목 : ${params.title}
-        내용 : ${params.content}`;
-      default:
-        return `시스템 내부 오류가 발생하였습니다.`;
-    }
-  };
-
   const [alertContent, setAlertContent] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -70,11 +51,7 @@ export default function TodoForm({ data, onEditTodoClick }: TodoFormProps) {
     // 제목과 내용이 모두 존재해야만 정상처리(하나라도 없는 경우 오류 발생)
     // "01" : 필수 입력값 검증 실패 안내
     if (!todo.title.trim() || !todo.content.trim()) {
-      const errorMsg = getErrorMsg("01", {
-        title: todo.title,
-        content: todo.content,
-      });
-      setAlertContent(errorMsg);
+      setAlertContent(`제목과 내용을 모두 입력해 주세요!`);
       openModal();
       return;
     }
@@ -84,6 +61,7 @@ export default function TodoForm({ data, onEditTodoClick }: TodoFormProps) {
       title: todo.title,
       content: todo.content,
       isDone: false,
+      comments: [],
     };
 
     if (data) {
