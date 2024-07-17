@@ -4,15 +4,56 @@ interface DoneProps {
   $isDone?: "done" | "working";
 }
 
-export const DetailWrapper = styled.div<DoneProps>`
+export const DetailWrapper = styled.div`
   max-height: 100%;
-  height: calc(100vh - 69px);
+  height: 100%;
   width: 100%;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const Detail = styled.div<DoneProps>`
+  background-color: white;
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 100%;
+  max-height: 100%;
+  width: 40rem;
+  min-height: 25rem;
+  border-radius: 1rem;
+
+  border: ${({ $isDone, theme }) => {
+    switch ($isDone) {
+      case "done":
+        return `1px solid ${theme.colors.lightGreen}`;
+      default:
+        return `1px solid ${theme.colors.lightBlue}`;
+    }
+  }};
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+  button {
+    height: 45px;
+  }
+`;
+
+export const DetailHeader = styled.div<DoneProps>`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
   background-color: ${({ $isDone, theme }) => {
     switch ($isDone) {
       case "working":
@@ -23,45 +64,10 @@ export const DetailWrapper = styled.div<DoneProps>`
         return theme.colors.whiteBlue;
     }
   }};
-`;
 
-export const Detail = styled.div<DoneProps>`
-  background-color: white;
-  margin: 0.5rem;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  max-width: 100%;
-  max-height: 100%;
-  width: 40rem;
-  height: 25rem;
-  border-radius: 1rem;
-  border: ${({ $isDone, theme }) => {
-    switch ($isDone) {
-      case "done":
-        return `1px solid ${theme.colors.green}`;
-      default:
-        return `1px solid ${theme.colors.blue}`;
-    }
-  }};
-`;
-
-export const ButtonWrapper = styled.div`
-  display: flex;
-  button {
-    height: 45px;
+  h3 {
+    font-size: x-large;
   }
-`;
-
-export const DetailHeader = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  border-bottom: 2px solid lightgrey;
 `;
 
 export const DetailTodoInfo = styled.div`
@@ -72,7 +78,8 @@ export const DetailTodoInfo = styled.div`
 
 export const DetailTodo = styled.div`
   width: 100%;
-  padding: 1rem;
+  padding: 2rem;
+  min-height: 10rem;
   height: 100%;
 `;
 

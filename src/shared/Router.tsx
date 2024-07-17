@@ -8,6 +8,7 @@ import MyTodos from "@pages/MyTodos";
 import Todos from "@pages/Todos";
 import useAuth from "@/hooks/useAuth";
 import TodoAdd from "@pages/TodoAdd";
+import TodoEdit from "@pages/TodoEdit";
 // import DashBoardLayout from "@shared/DashBoardLayout";
 // import Like from "@pages/Like";
 
@@ -49,7 +50,10 @@ const Router = () => {
             path="/todos/:id"
             element={<PrivateRoute element={TodoDetail} />}
           />
-
+          <Route
+            path="/todos/:id/edit"
+            element={<PrivateRoute element={TodoEdit} />}
+          />
           {/* <Route path="/dashboard" element={<DashBoardLayout />}>
             <Route path="/dashboard/myPage" element={<MyPage />}></Route>
             <Route path="/dashboard/like" element={<Like />}></Route>
