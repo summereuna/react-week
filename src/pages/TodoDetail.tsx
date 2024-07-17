@@ -55,8 +55,12 @@ const TodoDetail = () => {
                 <span>id:{todo.id}</span>
               </S.DetailTodoInfo>
               <S.ButtonWrapper>
-                <Button onClick={goToEditPage}>수정</Button>
-                <Button onClick={backPage}>뒤로가기</Button>
+                {todo.isDone ? null : (
+                  <Button onClick={goToEditPage}>수정</Button>
+                )}
+                <Button onClick={backPage} buttonTheme={`btnDone`}>
+                  뒤로가기
+                </Button>
               </S.ButtonWrapper>
             </S.DetailHeader>
             <S.DetailTodo>

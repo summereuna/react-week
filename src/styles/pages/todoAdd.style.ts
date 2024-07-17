@@ -52,6 +52,7 @@ export const InputContainer = styled.div`
 export const ButtonWrapper = styled.div`
   display: flex;
   width: 100%;
+  gap: 1rem;
 
   /* justify-content: flex-end; */
   button {

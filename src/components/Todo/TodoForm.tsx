@@ -129,6 +129,13 @@ export default function TodoForm({ data, onEditTodoClick }: TodoFormProps) {
               <Button type="submit" buttonTheme="btnAdd">
                 {data ? `수정하기` : `추가하기`}
               </Button>
+              <Button
+                type="button"
+                buttonTheme="btnDelete"
+                onClick={() => navigate(-1)}
+              >
+                {`취소하기`}
+              </Button>
             </S.ButtonWrapper>
           </S.Form>
         </S.TodoFormContainer>
