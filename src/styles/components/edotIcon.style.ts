@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const Wrapper = styled.div`
+  position: absolute;
+  right: 0;
+  top: 1rem;
+  width: 1.2rem;
+  height: 1.2rem;
+`;
 export const EditIcon = styled.div`
   position: relative;
   right: 0;

@@ -6,14 +6,19 @@ import ModalPortal from "@components/Modal/ModalPortal";
 import DropdownLayout from "@components/Modal/DropdownLayout";
 import Dropdown from "@components/Modal/Dropdown";
 
-export default function EditIcon() {
+interface EditIconProps {
+  onEditStart: () => void;
+}
+export default function EditIcon({ onEditStart }: EditIconProps) {
   const { openModal, closeModal, isVisible } = useModal();
 
   const { dropdownPosition, divRef } = useDropdownPosition(isVisible);
 
+  //모달 열고 난 뒤 수정/삭제 클릭 했을 때 실행 되는 함수
   const handleEditComment = () => {
     console.log("코멘트 수정");
-    closeModal();
+    onEditStart(); //모달 메뉴 중 수정 클럭 시 에디팅 시작
+    closeModal(); //그리고 메뉴 모달은 꺼짐
   };
 
   const handleDeleteComment = () => {
@@ -22,13 +27,8 @@ export default function EditIcon() {
   };
 
   return (
-    <>
-      <S.EditIcon
-        onClick={() => {
-          openModal();
-        }}
-        ref={divRef}
-      >
+    <S.Wrapper>
+      <S.EditIcon onClick={openModal} ref={divRef}>
         {ellipsis}
       </S.EditIcon>
       {isVisible && (
@@ -44,6 +44,6 @@ export default function EditIcon() {
           </DropdownLayout>
         </ModalPortal>
       )}
-    </>
+    </S.Wrapper>
   );
 }

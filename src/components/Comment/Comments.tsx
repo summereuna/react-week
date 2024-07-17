@@ -1,8 +1,8 @@
 import useCreateComment from "@/hooks/useCreateComment";
 import useModal from "@/hooks/useModal";
 import { Comment } from "@/types";
-import Button from "@components/Button";
-import CommentItem from "@components/CommentItem";
+import CommentForm from "@components/Comment/CommentForm";
+import CommentList from "@components/Comment/CommentList";
 import Error from "@components/Error";
 import Loading from "@components/Loading";
 import ModalAlert from "@components/Modal/ModalAlert";
@@ -59,24 +59,15 @@ export default function Comments({ todoId, userId }: CommentsProps) {
           {isError && (
             <Error message={`오류가 발생했어요.\n다시 시도해 주세요!`} />
           )}
-          <CommentItem todoId={todoId} />
+          <CommentList todoId={todoId} />
         </S.CommentListWrapper>
         {/*  */}
-        <S.Form onSubmit={handleSubmit}>
-          <S.Avatar></S.Avatar>
-          <S.FormContainer>
-            <S.TextareaWrapper>
-              <S.Textarea
-                onChange={changeNewComment}
-                value={comment}
-                placeholder="댓글을 입력하세요. (최대 200글자)"
-                maxLength={200}
-              />
-              <S.UserIdText>{userId}</S.UserIdText>
-            </S.TextareaWrapper>
-            <Button type="submit">등록</Button>
-          </S.FormContainer>
-        </S.Form>
+        <CommentForm
+          onChange={changeNewComment}
+          onSubmit={handleSubmit}
+          value={comment}
+          userId={userId}
+        />
       </S.CommentsContainer>
 
       {isVisible && (

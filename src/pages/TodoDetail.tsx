@@ -7,7 +7,7 @@ import { fetchTodoById } from "@/api/todos";
 import formatNewLineText from "@/utils/formatNewLineText";
 import Error from "@components/Error";
 import Loading from "@components/Loading";
-import Comments from "@components/Comments";
+import Comments from "@components/Comment/Comments";
 import useUser from "@/hooks/useUser";
 
 const TodoDetail = () => {

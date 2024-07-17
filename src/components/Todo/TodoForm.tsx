@@ -101,6 +101,7 @@ export default function TodoForm({ data, onEditTodoClick }: TodoFormProps) {
                 placeholder="내용을 입력해 주세요. (200자 이내)"
                 name="content"
                 maxLength={200}
+                minLength={1}
               />
             </S.InputContainer>
             <S.ButtonWrapper>
