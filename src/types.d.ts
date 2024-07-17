@@ -4,7 +4,7 @@ export interface Todo {
   title: string;
   content: string;
   isDone: boolean;
-  comments: string[];
+  comments?: string[];
 }
 
 export interface User {
