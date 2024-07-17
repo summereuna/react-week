@@ -90,6 +90,8 @@ export default function CommentItem({
             value={updatedComment}
             userId={userId}
             alertContent={alertContent}
+            isEditing={isEditing}
+            onEditEnd={onEditEnd}
           />
         </S.CommentContainer>
       )}

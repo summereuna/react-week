@@ -65,3 +65,9 @@ export const UserIdText = styled.span`
   left: 1rem;
   top: 1rem;
 `;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+`;

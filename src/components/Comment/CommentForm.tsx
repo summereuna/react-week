@@ -7,6 +7,8 @@ interface CommentForm {
   value: string;
   userId: string;
   alertContent?: string;
+  isEditing?: boolean;
+  onEditEnd?: () => void;
 }
 export default function CommentForm({
   onChange,
@@ -14,6 +16,8 @@ export default function CommentForm({
   value,
   userId,
   alertContent,
+  isEditing,
+  onEditEnd,
 }: CommentForm) {
   return (
     <S.Form onSubmit={onSubmit}>
@@ -31,7 +35,14 @@ export default function CommentForm({
           <p>{alertContent}</p>
           <S.UserIdText>{userId}</S.UserIdText>
         </S.TextareaWrapper>
-        <Button type="submit">등록</Button>
+        <S.ButtonWrapper>
+          <Button type="submit">등록</Button>
+          {isEditing ? (
+            <Button type="button" buttonTheme="btnDelete" onClick={onEditEnd}>
+              취소
+            </Button>
+          ) : null}
+        </S.ButtonWrapper>
       </S.FormContainer>
     </S.Form>
   );
