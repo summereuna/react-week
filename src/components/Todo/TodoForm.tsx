@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import useModal from "@/hooks/useModal";
@@ -16,35 +16,37 @@ type ErrorParamsType = {
   content: string;
 };
 
-export default function TodoForm() {
+interface TodoFormProps {
+  data?: Todo;
+  onEditTodoClick?: (updatedTodo: Todo) => void;
+}
+
+export default function TodoForm({ data, onEditTodoClick }: TodoFormProps) {
   const navigate = useNavigate();
-  const { createTodo, isPending } = useCreateTodo();
-
-  const { id: userId } = useUser();
   const { isVisible, openModal, closeModal } = useModal();
-  const [todo, setTodo] = useState({ title: "", content: "" });
+  const { id: userId } = useUser();
 
-  const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTodo({ ...todo, title: e.target.value });
+  const { createTodo, isPending } = useCreateTodo();
+  const [todo, setTodo] = useState(data ? data : { title: "", content: "" });
+
+  useEffect(() => {
+    if (data) {
+      setTodo(data);
+    }
+  }, [data]);
+
+  const changeNewTodo = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setTodo({
+      ...todo,
+      [name]: value,
+    });
   };
-
-  const changeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTodo({ ...todo, content: e.target.value });
-  };
-
-  // const { data: validationData } = useQuery({
-  //   queryKey: ["todos"],
-  //   queryFn: fetchTodos,
-  //   select: (data) => {
-  //     if (data) {
-  //       return data.filter(
-  //         (item: Todo) =>
-  //           item.title === todo.title && item.content === todo.content
-  //       );
-  //     }
-  //     return [];
-  //   },
-  // });
 
   // 에러 메시지 발생 함수
   const getErrorMsg = (errorCode: string, params: ErrorParamsType): string => {
@@ -55,12 +57,6 @@ export default function TodoForm() {
         [입력된 값]
         제목 : ${params.title}
         내용 : ${params.content}`;
-      // case "02":
-      //   return `[내용 중복 안내]\n
-      //   입력하신 제목(${params.title}) 및 내용(${params.content})과 일치하는 TODO가
-      //   이미 TODO LIST에 등록되어 있습니다.\n
-      //   기 등록한 TODO ITEM의 수정을 원하시면
-      //   해당 아이템의 [상세보기]-[수정]을 이용해주세요.`;
       default:
         return `시스템 내부 오류가 발생하였습니다.`;
     }
@@ -68,7 +64,7 @@ export default function TodoForm() {
 
   const [alertContent, setAlertContent] = useState("");
 
-  const onAddTodoClick = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); //리로드 방지
 
     // 제목과 내용이 모두 존재해야만 정상처리(하나라도 없는 경우 오류 발생)
@@ -83,18 +79,6 @@ export default function TodoForm() {
       return;
     }
 
-    // 이미 존재하는 todo 항목이면 오류
-    // // "02" : 내용 중복 안내
-    // if (validationData!.length > 0) {
-    //   const errorMsg = getErrorMsg("02", {
-    //     title: todo.title,
-    //     content: todo.content,
-    //   });
-    //   setAlertContent(errorMsg);
-    //   openModal();
-    //   return;
-    // }
-
     const newTodo: Omit<Todo, "id"> = {
       userId,
       title: todo.title,
@@ -102,7 +86,15 @@ export default function TodoForm() {
       isDone: false,
     };
 
-    createTodo(newTodo);
+    if (data) {
+      const updatedTodo: Todo = {
+        ...data,
+        ...newTodo,
+      };
+      onEditTodoClick?.(updatedTodo);
+    } else {
+      createTodo(newTodo);
+    }
 
     setTodo({ title: "", content: "" });
 
@@ -115,18 +107,18 @@ export default function TodoForm() {
     <>
       <S.Wrapper>
         <S.TodoFormContainer>
-          <h2>투두 추가하기</h2>
-          <S.Form onSubmit={onAddTodoClick}>
+          <h2>{data ? `투두 수정하기` : `투두 추가하기`}</h2>
+          <S.Form onSubmit={handleSubmit}>
             <S.InputContainer>
               <Input
-                onChange={changeInput}
+                onChange={changeNewTodo}
                 value={todo.title}
                 label="제목을 입력해주세요. (50자 이내)"
                 name="title"
                 maxLength={50}
               />
               <S.TextArea
-                onChange={changeTextArea}
+                onChange={changeNewTodo}
                 value={todo.content}
                 placeholder="내용을 입력해 주세요. (200자 이내)"
                 name="content"
@@ -135,7 +127,7 @@ export default function TodoForm() {
             </S.InputContainer>
             <S.ButtonWrapper>
               <Button type="submit" buttonTheme="btnAdd">
-                추가
+                {data ? `수정하기` : `추가하기`}
               </Button>
             </S.ButtonWrapper>
           </S.Form>

@@ -36,7 +36,7 @@ export const Detail = styled.div<DoneProps>`
   max-width: 100%;
   max-height: 100%;
   width: 40rem;
-  height: 25rem;
+  min-height: 25rem;
   border-radius: 1rem;
   border: ${({ $isDone, theme }) => {
     switch ($isDone) {
@@ -50,6 +50,7 @@ export const Detail = styled.div<DoneProps>`
 
 export const ButtonWrapper = styled.div`
   display: flex;
+  gap: 1rem;
   button {
     height: 45px;
   }
