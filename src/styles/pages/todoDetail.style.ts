@@ -4,31 +4,20 @@ interface DoneProps {
   $isDone?: "done" | "working";
 }
 
-export const DetailWrapper = styled.div<DoneProps>`
+export const DetailWrapper = styled.div`
   max-height: 100%;
-  height: calc(100vh - 69px);
+  height: 100%;
   width: 100%;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${({ $isDone, theme }) => {
-    switch ($isDone) {
-      case "working":
-        return theme.colors.whiteBlue;
-      case "done":
-        return theme.colors.whiteGreen;
-      default:
-        return theme.colors.whiteBlue;
-    }
-  }};
 `;
 
 export const Detail = styled.div<DoneProps>`
   background-color: white;
   margin: 0.5rem;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -38,12 +27,13 @@ export const Detail = styled.div<DoneProps>`
   width: 40rem;
   min-height: 25rem;
   border-radius: 1rem;
+
   border: ${({ $isDone, theme }) => {
     switch ($isDone) {
       case "done":
-        return `1px solid ${theme.colors.green}`;
+        return `1px solid ${theme.colors.lightGreen}`;
       default:
-        return `1px solid ${theme.colors.blue}`;
+        return `1px solid ${theme.colors.lightBlue}`;
     }
   }};
 `;
@@ -56,13 +46,28 @@ export const ButtonWrapper = styled.div`
   }
 `;
 
-export const DetailHeader = styled.div`
+export const DetailHeader = styled.div<DoneProps>`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  border-bottom: 2px solid lightgrey;
+  padding: 2rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background-color: ${({ $isDone, theme }) => {
+    switch ($isDone) {
+      case "working":
+        return theme.colors.whiteBlue;
+      case "done":
+        return theme.colors.whiteGreen;
+      default:
+        return theme.colors.whiteBlue;
+    }
+  }};
+
+  h3 {
+    font-size: x-large;
+  }
 `;
 
 export const DetailTodoInfo = styled.div`
@@ -73,7 +78,8 @@ export const DetailTodoInfo = styled.div`
 
 export const DetailTodo = styled.div`
   width: 100%;
-  padding: 1rem;
+  padding: 2rem;
+  min-height: 10rem;
   height: 100%;
 `;
 

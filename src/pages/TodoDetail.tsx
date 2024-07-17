@@ -7,6 +7,7 @@ import { fetchTodoById } from "@/api/todos";
 import formatNewLineText from "@/utils/formatNewLineText";
 import Error from "@components/Error";
 import Loading from "@components/Loading";
+import Comments from "@components/Comments";
 // import useUser from "@/hooks/useUser";
 
 const TodoDetail = () => {
@@ -47,12 +48,13 @@ const TodoDetail = () => {
         />
       )}
       {isSuccess && (
-        <S.DetailWrapper $isDone={todo.isDone ? "done" : "working"}>
+        <S.DetailWrapper>
           <S.Detail $isDone={todo.isDone ? "done" : "working"}>
-            <S.DetailHeader>
+            <S.DetailHeader $isDone={todo.isDone ? "done" : "working"}>
               <S.DetailTodoInfo>
-                <span>작성자: {todo.userId} 님</span>
-                <span>id:{todo.id}</span>
+                <h3>{todo.title}</h3>
+                <span>{todo.userId} 님</span>
+                {/* <span>id:{todo.id}</span> */}
               </S.DetailTodoInfo>
               <S.ButtonWrapper>
                 {todo.isDone ? null : (
@@ -64,11 +66,11 @@ const TodoDetail = () => {
               </S.ButtonWrapper>
             </S.DetailHeader>
             <S.DetailTodo>
-              <h3>{todo.title}</h3>
               <S.DetailTodoContent>
                 {formatNewLineText(todo.content)}
               </S.DetailTodoContent>
             </S.DetailTodo>
+            <Comments />
           </S.Detail>
         </S.DetailWrapper>
       )}
