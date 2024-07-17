@@ -14,6 +14,7 @@ export const UlComments = styled.ul`
 `;
 
 export const LiComments = styled.li`
+  position: relative;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -34,6 +35,13 @@ export const Avatar = styled.div`
   height: 3rem;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.grey};
+`;
+
+export const AvatarImg = styled.img`
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
 `;
 
 export const TextContainer = styled.div`
