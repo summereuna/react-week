@@ -78,7 +78,7 @@ export default function CommentItem({
               <S.TextContent>{comment}</S.TextContent>
             </S.TextareaWrapper>
           </S.TextContainer>
-          <EditIcon onEditStart={onEditStart} />
+          <EditIcon onEditStart={onEditStart} commentId={commentId} />
           {/* 모달 메뉴 열고 수정 선택해야 에디팅 시작하기 때문에 더 내려주기 */}
         </S.CommentContainer>
       )}
