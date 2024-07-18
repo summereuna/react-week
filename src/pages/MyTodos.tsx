@@ -3,14 +3,18 @@ import TodoList from "@components/Todo/TodoList";
 import { Wrapper } from "@styles/components/form.style";
 import * as S from "@styles/pages/myPage.style";
 import { Todo } from "@/types";
-import useMyTodos from "@/hooks/useMyTodos";
+import useUserTodos from "@/hooks/useUserTodos";
 import Error from "@components/Error";
 import Loading from "@components/Loading";
 import Button from "@components/Button";
 import { useNavigate } from "react-router-dom";
+import useUser from "@/hooks/useUser";
 
 const MyTodos = () => {
-  const { myTodoList, isPending, isError, isSuccess, userId } = useMyTodos();
+  const { id: myId } = useUser();
+
+  const { myTodoList, isPending, isError, isSuccess, userId } =
+    useUserTodos(myId);
 
   const workingTodoList = myTodoList?.filter((todo: Todo) => !todo.isDone);
   const doneTodoList = myTodoList?.filter((todo: Todo) => todo.isDone);

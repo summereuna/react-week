@@ -1,4 +1,5 @@
 import useEditComment from "@/hooks/useEditComment";
+import useUser from "@/hooks/useUser";
 import CommentForm from "@components/Comment/CommentForm";
 import EditIcon from "@components/EditIcon";
 import * as S from "@styles/components/comment/commentItem.style";
@@ -22,6 +23,7 @@ export default function CommentItem({
   onEditStart,
   onEditEnd,
 }: CommentItemProps) {
+  const { id: myId } = useUser();
   //패치하는 로직 여기서 구현
   const { editMutate } = useEditComment();
 
@@ -78,7 +80,9 @@ export default function CommentItem({
               <S.TextContent>{comment}</S.TextContent>
             </S.TextareaWrapper>
           </S.TextContainer>
-          <EditIcon onEditStart={onEditStart} commentId={commentId} />
+          {userId === myId && (
+            <EditIcon onEditStart={onEditStart} commentId={commentId} />
+          )}
           {/* 모달 메뉴 열고 수정 선택해야 에디팅 시작하기 때문에 더 내려주기 */}
         </S.CommentContainer>
       )}
