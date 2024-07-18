@@ -1,23 +1,25 @@
+import AlertText from "@components/AlertText";
 import Button from "@components/Button";
 import * as S from "@styles/components/comment/commentForm.style";
+import styled from "styled-components";
 
 interface CommentForm {
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onSubmit: (e: React.FormEvent) => void;
   value: string;
   userId: string;
-  alertContent?: string;
   isEditing?: boolean;
   onEditEnd?: () => void;
+  alertMessage?: string;
 }
 export default function CommentForm({
   onChange,
   onSubmit,
   value,
   userId,
-  alertContent,
   isEditing,
   onEditEnd,
+  alertMessage,
 }: CommentForm) {
   return (
     <S.Form onSubmit={onSubmit}>
@@ -32,7 +34,7 @@ export default function CommentForm({
             maxLength={200}
             minLength={1}
           />
-          <p>{alertContent}</p>
+          <AlertText>{alertMessage}</AlertText>
           <S.UserIdText>{userId}</S.UserIdText>
         </S.TextareaWrapper>
         <S.ButtonWrapper>

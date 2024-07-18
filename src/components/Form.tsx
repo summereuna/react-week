@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import * as S from "@styles/components/form.style";
+import AlertText from "@components/AlertText";
 
 interface FormProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -10,6 +11,7 @@ interface FormProps {
   id: string;
   pw: string;
   isRegister: boolean;
+  alertMessage?: string;
 }
 
 export default function Form({
@@ -19,6 +21,7 @@ export default function Form({
   id,
   pw,
   isRegister,
+  alertMessage,
 }: FormProps) {
   return (
     <S.Wrapper>
@@ -41,6 +44,7 @@ export default function Form({
               onChange={(e) => onChange(e)}
             />
           </S.InputContainer>
+          <AlertText>{alertMessage}</AlertText>
           <S.ButtonContainer>
             <Button type="submit" buttonSize="lg" disabled={disabled}>
               {isRegister ? `회원가입` : `로그인`}

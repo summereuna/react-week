@@ -21,7 +21,6 @@ export default function CommentList({ todoId }: CommentListProps) {
   const handleEditStart = (commentId: string) => {
     setEditingCommentId(commentId);
     // setIsEditing(true);
-    console.log("댓글아이디", commentId);
   };
 
   // 에디팅 모드 종료하는 함수

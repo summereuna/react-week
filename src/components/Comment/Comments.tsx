@@ -1,13 +1,11 @@
+import { useAppDispatch, useAppSelector } from "@/hooks/rtkHooks";
 import useCreateComment from "@/hooks/useCreateComment";
-import useModal from "@/hooks/useModal";
 import { Comment } from "@/types";
 import CommentForm from "@components/Comment/CommentForm";
 import CommentList from "@components/Comment/CommentList";
 import Error from "@components/Error";
 import Loading from "@components/Loading";
-import ModalAlert from "@components/Modal/ModalAlert";
-import ModalLayout from "@components/Modal/ModalLayout";
-import ModalPortal from "@components/Modal/ModalPortal";
+import { clearAlert, setAlert } from "@redux/slices/alertSlice";
 import * as S from "@styles/components/comment/comments.style";
 import { useState } from "react";
 
@@ -17,21 +15,31 @@ interface CommentsProps {
 }
 
 export default function Comments({ todoId, userId }: CommentsProps) {
+  const dispatch = useAppDispatch();
+  const alertMessage = useAppSelector((state) => state.alert["commentForm"]);
+
   const { createComment, isPending, isError } = useCreateComment();
-  const { isVisible, openModal, closeModal } = useModal();
-  const [alertContent, setAlertContent] = useState("");
 
   const [comment, setComment] = useState("");
 
   const changeNewComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (alertMessage) {
+      dispatch(clearAlert("commentForm"));
+    }
+
     setComment(e.target.value);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!comment.trim()) {
-      setAlertContent(`댓글은 1글자 이상 적어 주세요.`);
-      openModal();
+      dispatch(
+        setAlert({
+          formId: "commentForm",
+          message: "댓글을 1글자 이상 적어 주세요.",
+        })
+      );
       return;
     }
 
@@ -67,16 +75,9 @@ export default function Comments({ todoId, userId }: CommentsProps) {
           onSubmit={handleSubmit}
           value={comment}
           userId={userId}
+          alertMessage={alertMessage}
         />
       </S.CommentsContainer>
-
-      {isVisible && (
-        <ModalPortal>
-          <ModalLayout onClose={closeModal}>
-            <ModalAlert onClose={closeModal} content={alertContent} />
-          </ModalLayout>
-        </ModalPortal>
-      )}
     </>
   );
 }

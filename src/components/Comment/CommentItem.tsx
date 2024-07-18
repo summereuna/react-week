@@ -1,7 +1,9 @@
+import { useAppDispatch, useAppSelector } from "@/hooks/rtkHooks";
 import useEditComment from "@/hooks/useEditComment";
 import useUser from "@/hooks/useUser";
 import CommentForm from "@components/Comment/CommentForm";
 import EditIcon from "@components/EditIcon";
+import { clearAlert, setAlert } from "@redux/slices/alertSlice";
 import * as S from "@styles/components/comment/commentItem.style";
 import { useEffect, useState } from "react";
 
@@ -24,6 +26,11 @@ export default function CommentItem({
   onEditEnd,
 }: CommentItemProps) {
   const { id: myId } = useUser();
+  const dispatch = useAppDispatch();
+  const alertMessage = useAppSelector(
+    (state) => state.alert["editCommentForm"]
+  );
+
   //패치하는 로직 여기서 구현
   const { editMutate } = useEditComment();
 
@@ -38,16 +45,24 @@ export default function CommentItem({
   }, [isEditing, comment]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (alertMessage) {
+      dispatch(clearAlert("editCommentForm"));
+    }
+
+    console.log(e.target.value);
     setUpdatedComment(e.target.value);
   };
 
-  const [alertContent, setAlertContent] = useState("");
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // console.log("댓글 수정 폼 submit");
-    if (!comment.trim()) {
-      setAlertContent(`댓글은 1글자 이상 적어 주세요.`);
+
+    if (!updatedComment.trim()) {
+      dispatch(
+        setAlert({
+          formId: "editCommentForm",
+          message: "댓글을 1글자 이상 적어 주세요.",
+        })
+      );
       return;
     }
 
@@ -93,9 +108,9 @@ export default function CommentItem({
             onSubmit={handleSubmit}
             value={updatedComment}
             userId={userId}
-            alertContent={alertContent}
             isEditing={isEditing}
             onEditEnd={onEditEnd}
+            alertMessage={alertMessage}
           />
         </S.CommentContainer>
       )}
