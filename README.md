@@ -1,6 +1,6 @@
 # 📝 투두 리스트
 
-- React 주특기 주차 Lv.4 과제
+- React 주특기 주차 Lv.5 과제
 - 정은화
 - [배포한 사이트: vercel](https://react-todo-list-five-tau.vercel.app)
 
@@ -8,41 +8,67 @@
 
 ### 목표
 
-- 로그인/회원가입 기능 추가하기
-  - 지금까지 배운 내용을 활용하여 나만의 React App 을 만들어봅시다.
-  - 레벨 4에서는 로그인, 회원가입 기능을 만들고 5에서 원하는 추가기능을 붙여 볼 거에요!
+- 레벨 4 과제에 살을 붙여, 나만의 React App 을 만들어봅시다.
+  - 주제는 반드시 Todo List가 아니여도 됩니다. 본문과 댓글을 가진 구조의 웹 서비스면 OK!
 
-### 과제 조건
+### 👍 Checklist : 과제 진행 간 고민해야 하는 부분
 
-- 로그인, 회원가입 페이지를 각각 구현합니다.
-- 아이디와 비밀번호가 모두 입력되지 않으면, API 요청을 보내지 않도록 합니다.
-- 서버의 에러를 `alert` 또는 직접 만든 모달 등을 통해 유저에게 표시합니다.
-  - id가 중복된 경우
-  - 존재하지 않는 아이디를 입력한 경우
-  - 비밀번호가 잘못된 경우
-- JWT의 유효시간이 만료된 경우, 유저에게 재로그인을 할 것을 표시합니다.
-- 로그인을 하지 않은 경우에는 `로그인/회원가입` 페이지만 접근 가능합니다.
-- 로그인을 이미 한 경우 `로그인/회원가입` 페이지는 접근 할 수 없습니다.
-- 로그아웃 기능을 구현합니다.
+- 상태관리 ( 유지 / 초기화 ) 가 잘 되어있나요?
+- 각 컴포넌트의 재사용성이 높나요?
+- 예외처리가 미흡한 부분은 없나요?
+
+### ⚙️ features : 구현해야 할 기능
+
+- **(1) 공통**
+  - UI 구현하기
+  - API 명세서 작성하기
+- **(2) 본문 (ex: 할일) CRUD 구현**
+  - 본문 리스트 조회 하기
+  - 본문 조회 하기
+  - 본문 추가 하기
+  - 본문 삭제 하기
+  - 본문 수정 하기
+- **(3) 배포**
+  - json-server 서버 배포
+  - 리액트 프로젝트 배포 (S3, vercel 등 자유)
+
+### 📌 Requirement : 과제에 요구되는 사항
+
+- **(1) UI/UX**
+  - 창의적인 UI/UX로 과제를 만드세요.
+  - 예시에 없어도 만들고 싶은 기능이 있다면 **OK!**
+- **(2) 필수 요구 사항**
+  - **동적 라우팅을 사용**하세요.
+  - 1개 이상의 `Custom Hook`을 구현하세요.
+  - **Form에 유효성 검증 기능을 적용**하세요. _유효성 검증이란, 아래의 예시들을 의미합니다._
+    - ex: 제목을 10글자 이상 기입하지 않으면, 글을 추가할 수 없도록 제한 → `Alert` 으로 안내
+    - ex: Form에서 모든 input에 값을 입력하지 않으면, 버튼이 비활성화
+  - 버튼 **컴포넌트 1개로 모든 버튼을 구현**하세요. 모든 스타일과 기능을 버튼을 구현할 수 있는 **만능 버튼**을 만들어보는 것 입니다.
+  - `development` 환경에서만 `redux devtool`이 활성화 되도록 처리합니다.
+  - 배포된 결과물에서는 `console.log()` 가 보이지 않도록 처리합니다.
+  - `.env` 를 이용해서 API 서버의 URL 코드상에서 숨기도록 처리합니다.
+- (3) API 명세서 (프로젝트 완료 후 작성)
+  프로젝트가 완료되었다면, 간이 API 서버에서 어떤 API를 사용하였는지 명세서를 작성해주세요.
+
+### 🏃 Challenge: 도전해볼만한 키워드를 드립니다. 검색을 통해 각 키워드들이 어떤 기능인지 찾아보고 도전해보세요. (필수 ❌)
+
+- **Infinite Scroll 또는 Pagination**
+  - 할일 또는 댓글이 양이 많을 때, 모든 데이터를 한번에 불러오는 것이 아니라 스크롤이 가장 아래에 도달할때마다 부분적으로 데이터를 Fetching 하도록 구현해봅니다.
+- **Form Help Text**
+  - Form의 유효성을 체크하고, 유효성을 체크 하지 못했을 때 사용자에게 유효성을 체크 하지 못한 이유에 대해서 안내하는 기능을 구현해봅니다.
 
 ### 📝 구현 방식
 
 사용자 인증/인가 (JWT 관리: LocalStorage => Cookie로 변경)
 
-#### 1. 왜 LocalStorage에서 관리하던 것을 Cookie에서 관리하는 것으로 변경했는지?
-
-- 연습하려고 변경해 봤다. 솔직히 현재 사용하는 서버 api가 refreshToken을 같이 주는 것도 아니라서, 로컬스토리지나 쿠키나 어딜 넣든 보안상 문제는 다 있는 것 같다. 😓
-- 그래서 refreshToken이 있는 경우를 대비해 연습하려고 쿠키로 전환했다. 기술 매니저님께 여쭤보니 보통은 JWT를 쿠키에 담아서 많이들 사용한다고 하신 영향도 있다.
-
-#### 2. Todo data
+#### 1. TodoList/Comments data
 
 - 서버 사이드 전역 상태 관리:
   - axios
   - json-server
-    - json-server => 무료 사용 가능해서 glitch로 json 배포
   - TanStackQuery
 
-#### 3. User data
+#### 2. User data
 
 - 클라이언트 사이드 전역 상태 관리 및 로컬 스토리지에서 관리:
   - axios
@@ -50,41 +76,56 @@
   - Local Storage
   - Redux Tool Kit
 
-#### 4. JWT 토큰 (accessToken만 있음)
+#### 3. 인증을 위한 JWT 토큰 (accessToken만 있음)
 
 - 쿠키에서 관리:
   - axios
   - `https://moneyfulpublicpolicy.co.kr` api
   - cookie
 
-#### 5. vercel 배포
+#### 4. 배포
 
-#### 6. 추가 사항
+- json-server => 무료 사용 가능해서 glitch로 json 배포
+- vercel 배포
 
-- 과제 조건에서는 로그인을 하지 않은 경우에는 `로그인/회원가입` 페이지만 접근 가능하다고 제시되어 있는데, 만든 웹 앱 조건 상 메인 화면은 보여도 될 것 같아서 일단 퍼블릭 페이지로 만들었다. 대신, 로그인하지 않은 채, 다른 페이지로 이동하려고 할 때, 로그인을 할 수 있도록 모달 알람을 띄운 후 로그인 페이지로 navigate 했다.
+#### 5. 구현
+
+- 투두 CRUD
+- 투두 별 상세페이지 댓글 CRUD
+
+#### 6. API 설계
+
+- `api = 배포한 json 서버`
+- `authApi = https://moneyfulpublicpolicy.co.kr`
+
+| 구분    | 기능                     | URL                      | Method | request                                                                                                                                       | response                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| :------ | :----------------------- | :----------------------- | :----- | :-------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Auth    | 회원가입                 | authApi/register         | POST   | {<br/>"id": "유저 아이디",<br/> "password": "유저 비밀번호",<br/>"nickname": "유저 닉네임"<br/>}                                              | **status: 201 Created**<br/>{<br/>"message": "회원가입 완료",<br/>"success": true<br/>}</br></br>**status: 401 Unauthorized**<br/>{<br/>"message": "아이디, 비밀번호, 닉네임은 필수값입니다."<br/>}</br></br>**status: 409 Conflict**<br/>{<br/>"message": "이미 존재하는 유저 id입니다."<br/>}                                                                                                                                                                                                                                                                                                                 |
+| Auth    | 로그인                   | authApi/login            | POST   | {<br/>"id": "유저 아이디",<br/>"password": "유저 비밀번호"<br/>}                                                                              | **status: 200 OK**<br/>{<br/>"accessToken": "억세스 토큰",<br/>"userId": "유저 아이디",<br/>"success": true,<br/>"avatar": null,<br/>"nickname": "닉네임"(기본값 "익명"으로 설정)<br/>}</br></br>**status: 401 Unauthorized**<br/>{<br/>"message": "id는 4글자 이상의 문자열이어야 합니다."<br/>}</br></br>**status: 401 Unauthorized**<br/>{<br/>"message": "존재하지 않는 유저입니다."<br/>}</br></br>**status: 401 Unauthorized**<br/>{<br/>"message": "password는 4글자 이상의 문자열이어야 합니다."<br/>}</br></br>**status: 401 Unauthorized**<br/>{<br/>"message": "비밀번호가 일치하지 않습니다."<br/>} |
+| Auth    | 유저 조회                | authApi/user             | GET    | {Authorization: Bearer 억세스토큰}                                                                                                            | **status: 200 OK**<br/>{<br/>"id": "유저 아이디",<br/>"nickname": "닉네임"<br/>"avatar": null,<br/>"success": true,}</br></br>**status: 401 Unauthorized(토큰 없는 경우)**<br/>{<br/>"message": "헤더에 authorization 정보가 존재하지 않습니다."<br/>}</br>                                                                                                                                                                                                                                                                                                                                                                     |
+| Todo    | 전체 투두 조회           | /api/todoList            | GET    | -                                                                                                                                             | {<br/> "todoList": [<br/>{<br/>"id": "투두 아이디",<br/>"userId": "유저 아이디",<br/>"title": "제목",<br/>"content": "내용",<br/>"isDone": 불리언 값<br/>},<br/>{<br/>"id": "투두 아이디",<br/>"userId": "유저 아이디",<br/>"title": "제목",<br/>"content": "내용",<br/>"isDone": 불리언 값<br/>},<br/>...<br/>]                                                                                                                                                                                                                                                                                                |
+| Todo    | 투두 상세 조회           | /api/todoList/:id        | GET    | {id: id}                                                                                                                                      | {<br/>"id": "투두 아이디",<br/>"userId": "유저 아이디",<br/>"title": "제목",<br/>"content": "내용",<br/>"isDone": 불리언 값<br/>}                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Todo    | 투두 생성                | /api/todoList/:id        | POST   | {<br/>"id": "투두 아이디"(자동 생성),<br/>"userId": "유저 아이디",<br/>"title": "제목",<br/>"content": "내용",<br/>"isDone": false (초기값 false)<br/>} |
+| Todo    | 투두 삭제                | /api/todoList/:id        | DELETE | {id: id}                                                                                                                                      |
+| Todo    | 투두 수정                | /api/todoList/:id        | PATCH  | {<br/>...currentTodo,<br/>"title": "수정한 제목",<br/>"content": "수정한 내용",<br/>}                                                         |
+| Todo    | 투두 수정(isDone 토글)   | /api/todoList/:id        | PATCH  | {<br/>...currentTodo,<br/>"isDone": !currentTodo.isDone<br/>}                                                                                   |
+| Comment | 투두 별 댓글 리스트 조회 | /api/comments?todoId=:id | GET    | {id: id}                                                                                                                                      | [<br/>{<br/>"id": "댓글 아이디",<br/>"userId": "유저 아이디",<br/>"todoId": "동일한 투두 아이디",<br/>"comment": "댓글"<br/>},<br/>{<br/>"id": "댓글 아이디",<br/>"userId": "유저 아이디",<br/>"todoId": "동일한 투두 아이디",<br/>"comment": "댓글"<br/>},<br/>]                                                                                                                                                                                                                                                                                                                                               |
+| Comment | 댓글 생성                | /api/comments            | POST   | {<br/>"id": "댓글 아이디"(자동 생성),<br/>"userId": "유저 아이디",<br/>"todoId": "투두 아이디",<br/>"comment": "댓글"<br/>}                   |
+| Comment | 댓글 삭제                | /api/comments/:id        | DELETE | {id: id}                                                                                                                                      |
+| Comment | 댓글 수정                | /api/comments/:id        | PATCH  | {<br/>...currentComment,<br/>"comment": "수정한 댓글"<br/>}                                                                                   |
 
 ## ✍️ 질문에 대한 답변
 
-#### 1. 특정 유저 (예: 비로그인 유저)의 페이지 접근을 제한하기 위한 전략이나 방식은 무엇이었나요?
+#### 1. Custom Hook을 구현하실 때 어떤 기능을 위해 사용하셨나요? 또한 Custom Hook을 사용함으로써 어떤 이점을 얻으셨나요?
+1. 리액트 포탈 사용을 위한 modal 훅 생성
+  - 이점: 필요한 곳에서 빠르고 간편하게 호출 가능
+2. 비동기 처리 로직 분리를 위해 mutate, query 훅 생성
+  - 이점: 컴포넌트 내부 로직 복잡성 감소 및 가독성 향상
+  - 단점: 파일양 증가
 
-- HOC(Higher Oder Component) 방식을 사용하여 페이지 접근을 제한했다.
-- 서버에서 응답받은 유저의 상태 정보(isLoggedIn)를 리액트 컴포넌트의 인자로 받아 Public 또는 Private 컴포넌트로 설정한 후, 다른 페이지 컴포넌트를 반환했다. (고차함수 사용)
+#### 2. API 서버의 URL을 .env 파일을 사용하여 숨기는 이유는 무엇일까요?
+- 보안
 
-#### 2. API 요청과 같은 비동기 작업 중 발생할 수 있는 에러에 대비해 에러 핸들링을 구현하셨나요? 구현했다면, 어떠한 방법을 사용하셨나요?
-
-- TanStackQuery와 axios를 사용하여 api 요청을 보냈다.
-- 예) data mutate 시 TanStackQuery의 onError 옵션을 사용하여 error객체를 받아와 message를 출력하는 방식을 사용했다.
-
-#### 3. Redux toolkit의 Thunk 미들웨어를 활용하였나요? 활용했다면, thunk가 필요한 이유를 설명해 주세요.
-
-- TanStackQuery와 axios를 사용하여 모든 비동기 작업을 처리했기 때문에 Thunk는 사용하지 않았다.
-
-#### 4. JWT 토큰은 무엇인가요?
-
-- 토큰이란, 클라이언트에서 보관하는 암호화 또는 인코딩된 인증 정보를 의미합니다. 서버의 상태를 유지하지 않고도 클라이언트의 인증 상태를 확인할 수 있게 해준다.
-- JWT는 토큰 기반 인증 방식에서 사용되는 특별한 토큰이다.
-- 세션처럼 서버에서 사용자의 인증 정보를 보관할 필요가 없기 때문에 서버 부담을 줄여주는 인증 수단이다.
-- 웹에서 인증 수단으로 사용되는 토큰은 주로 JWT (Json Web Token)을 이용한다.
-  - 국제 인터넷 표준 인증 규격 중 하나이다.
-  - 인코딩된 토큰을 누구나 복호화하여 payload를 볼 수 있다.
-  - 정보(payload)를 토큰화할 때 signature에 secret key가 필요하고, secret key는 복호화가 아니라 토큰이 유효한 지를 검증하는 데 사용된다.
+#### 3. 애플리케이션의 상태 값들을 컴포넌트 간 어떤 방식으로 공유하셨나요?
+- 서버 상태 관리: 서버에서 받아오는 TodoList, Comments의 경우 TanStackQuery으로 관리
+- 클라이언트 상태 관리: Error, Modal 등은 useState 및 리덕스 툴킷으로 관리
