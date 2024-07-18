@@ -7,7 +7,7 @@ import AlertText from "@components/AlertText";
 interface FormProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent) => Promise<void>;
-  disabled?: boolean;
+  isPending: boolean;
   id: string;
   pw: string;
   isRegister: boolean;
@@ -17,7 +17,7 @@ interface FormProps {
 export default function Form({
   onChange,
   onSubmit,
-  disabled = false,
+  isPending,
   id,
   pw,
   isRegister,
@@ -46,7 +46,7 @@ export default function Form({
           </S.InputContainer>
           <AlertText>{alertMessage}</AlertText>
           <S.ButtonContainer>
-            <Button type="submit" buttonSize="lg" disabled={disabled}>
+            <Button type="submit" buttonSize="lg" disabled={isPending}>
               {isRegister ? `회원가입` : `로그인`}
             </Button>
             {isRegister ? (

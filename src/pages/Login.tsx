@@ -79,7 +79,7 @@ const Login = () => {
       id={loginUser.ID}
       pw={loginUser.PASSWORD}
       isRegister={false}
-      disabled={isPending}
+      isPending={isPending}
       alertMessage={alertMessage}
     />
   );
