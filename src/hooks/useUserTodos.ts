@@ -1,11 +1,8 @@
 import { fetchTodos } from "@/api/todos";
-import useUser from "@/hooks/useUser";
 import { Todo } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
-const useMyTodos = () => {
-  const { id: userId } = useUser();
-
+const useUserTodos = (userId: string) => {
   const {
     data: myTodoList,
     isPending,
@@ -25,4 +22,4 @@ const useMyTodos = () => {
   return { myTodoList, isPending, isError, isSuccess, userId };
 };
 
-export default useMyTodos;
+export default useUserTodos;

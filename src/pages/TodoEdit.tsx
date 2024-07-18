@@ -22,9 +22,7 @@ export default function TodoEdit() {
 
   return (
     <>
-      {isPending && (
-        <Loading message={`투두를 수정 중입니다.\n잠시만 기다려 주세요!`} />
-      )}
+      {isPending && <Loading message={`잠시만 기다려 주세요!`} />}
       {isError && (
         <Error
           message={`투두 수정 중 오류가 발생했습니다.\n다시 시도해 주세요!`}

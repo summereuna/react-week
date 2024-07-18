@@ -55,9 +55,10 @@ const TodoDetail = () => {
                 <span>{todo.userId} 님</span>
               </S.DetailTodoInfo>
               <S.ButtonWrapper>
-                {todo.isDone ? null : (
+                {todo.userId === userId && !todo.isDone ? (
                   <Button onClick={goToEditPage}>수정</Button>
-                )}
+                ) : null}
+
                 <Button onClick={backPage} buttonTheme={`btnDone`}>
                   뒤로가기
                 </Button>
