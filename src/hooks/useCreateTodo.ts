@@ -15,7 +15,7 @@ const useCreateTodo = () => {
     mutationFn: addTodo,
     onSuccess: (todo) => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
-      navigate(`/todos/${todo.id}`);
+      navigate(`/todos/${todo.id}`, { replace: true }); //히스토리 스택 대체
     },
   });
 

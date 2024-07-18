@@ -19,7 +19,8 @@ const useEditTodo = () => {
     onSuccess: (_, todo) => {
       queryClient.invalidateQueries({ queryKey: ["todos"] }); //전체 투두 리스트
       queryClient.invalidateQueries({ queryKey: ["todo", todo.id] }); // 상세 페이지에서 겟하는 투두 아이디에 해당하는 투두
-      navigate(`/todos/${todo.id}`);
+      navigate(`/todos/${todo.id}`, { replace: true }); //히스토리 스택 대체
+      window.history.go(-1); // 수정 페이지 자체 제거
     },
   });
 
