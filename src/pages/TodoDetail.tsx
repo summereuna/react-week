@@ -41,7 +41,7 @@ const TodoDetail = () => {
           message={`상세 페이지를 불러오는 중입니다.\n잠시만 기다려 주새요!`}
         />
       )}
-      {(isError || !todo) && (
+      {isError && (
         <Error
           message={`상세 페이지를 불러오는 중 오류가 발생했습니다.\n다시 시도 해 주세요!`}
         />
