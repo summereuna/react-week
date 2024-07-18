@@ -7,7 +7,7 @@ const useEditComment = () => {
   const { mutate: editMutate } = useMutation({
     mutationFn: editComment,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["comments"] });
+      queryClient.invalidateQueries({ queryKey: ["comments"] }); // 댓글 수정 > 댓글 하나만 겟하는게 없으므로 전체 리스트
     },
   });
 

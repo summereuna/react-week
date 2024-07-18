@@ -8,11 +8,8 @@ const useGetByIdTodo = (todoId: string) => {
     isError,
     isSuccess,
   } = useQuery({
-    queryKey: ["todos", todoId],
-    queryFn: async ({ queryKey }) => {
-      const [, todoId] = queryKey;
-      return await fetchTodoById(todoId);
-    },
+    queryKey: ["todo", todoId], // 상세 페이지에서 겟하는 투두 아이디에 해당하는 투두
+    queryFn: () => fetchTodoById(todoId),
     enabled: !!todoId, // id가 있을 때만 쿼리를 실행
   });
 

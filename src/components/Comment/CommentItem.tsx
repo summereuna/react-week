@@ -49,7 +49,6 @@ export default function CommentItem({
       dispatch(clearAlert("editCommentForm"));
     }
 
-    console.log(e.target.value);
     setUpdatedComment(e.target.value);
   };
 
