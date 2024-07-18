@@ -1,7 +1,6 @@
 import AlertText from "@components/AlertText";
 import Button from "@components/Button";
 import * as S from "@styles/components/comment/commentForm.style";
-import styled from "styled-components";
 
 interface CommentForm {
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;

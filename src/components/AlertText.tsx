@@ -1,14 +1,9 @@
-import styled from "styled-components";
+import * as S from "@styles/components/alertText.style";
 
 interface AlertTextProps {
   children: React.ReactNode;
 }
 
 export default function AlertText({ children }: AlertTextProps) {
-  return <Text>{children}</Text>;
+  return <S.Text>{children}</S.Text>;
 }
-
-const Text = styled.div`
-  font-size: small;
-  color: ${({ theme }) => theme.colors.red};
-`;
