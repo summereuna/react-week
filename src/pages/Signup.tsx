@@ -71,7 +71,7 @@ const Signup = () => {
       id={signUpUser.ID}
       pw={signUpUser.PASSWORD}
       isRegister={true}
-      disabled={isPending}
+      isPending={isPending}
       alertMessage={alertMessage}
     />
   );

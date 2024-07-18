@@ -4,20 +4,19 @@ import { Todo } from "@/types";
 import Error from "@components/Error";
 import Loading from "@components/Loading";
 import TodoForm from "@components/Todo/TodoForm";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function TodoEdit() {
   const { id } = useParams<{ id: string }>();
-  const { editMutate } = useEditTodo();
-  const navigate = useNavigate();
 
+  //현재 수정할 Todo fetch
   const { todo, isPending, isError, isSuccess } = useGetByIdTodo(id!);
 
+  //수정 mutate
+  const { editTodoMutate, isPendingEditTodo, isErrorEditTodo } = useEditTodo();
+
   const onEditTodoClick = (updatedTodo: Todo) => {
-    editMutate(updatedTodo);
-    if (!isPending) {
-      navigate("/mypage");
-    }
+    editTodoMutate(updatedTodo);
   };
 
   return (
@@ -28,7 +27,15 @@ export default function TodoEdit() {
           message={`투두 수정 중 오류가 발생했습니다.\n다시 시도해 주세요!`}
         />
       )}
-      {isSuccess && <TodoForm data={todo} onEditTodoClick={onEditTodoClick} />}
+      {isSuccess && (
+        <TodoForm
+          data={todo}
+          formId={"editTodoForm"}
+          isPending={isPendingEditTodo}
+          isError={isErrorEditTodo}
+          onEditTodoClick={onEditTodoClick}
+        />
+      )}
     </>
   );
 }

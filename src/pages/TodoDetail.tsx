@@ -43,7 +43,7 @@ const TodoDetail = () => {
       )}
       {isError && (
         <Error
-          message={`상세 페이지를 불러오는 중 오류가 발생했습니다.\n다시 시도 해 주세요!`}
+          message={`상세 페이지를 불러오는 중 오류가 발생했습니다.\n다시 시도해 주세요!`}
         />
       )}
       {isSuccess && (

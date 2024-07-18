@@ -7,6 +7,12 @@ export const fetchTodoComments = async (todoId: string) => {
   return response.data;
 };
 
+//유저 아이디별 코멘트 조회
+// export const fetchUserComments = async (userId: string) => {
+//   const response = await api.get(`/comments?userId=${userId}`);
+//   return response.data;
+// };
+
 // POST Comment 생성
 // id는 서버에서 받아옴
 export const addComment = async (newComment: Omit<Comment, "id">) => {

@@ -15,21 +15,17 @@ export default function CommentList({ todoId }: CommentListProps) {
 
   // 현재 수정 중인 댓글 id 확인용 상태
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
-  // const [isEditing, setIsEditing] = useState(false);
 
   // 에디팅 모드 시작하는 함수
   const handleEditStart = (commentId: string) => {
     setEditingCommentId(commentId);
-    // setIsEditing(true);
   };
 
   // 에디팅 모드 종료하는 함수
   const handleEditEnd = () => {
     setEditingCommentId(null); //댓글 id값 비우기
-    // setIsEditing(false);
   };
 
-  // console.log("에디팅 상태", isEditing);
   return (
     <>
       <S.Title>댓글 {todoComments?.length ?? `0`}</S.Title>
