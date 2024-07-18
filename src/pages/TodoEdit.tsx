@@ -17,12 +17,6 @@ export default function TodoEdit() {
 
   const onEditTodoClick = (updatedTodo: Todo) => {
     editTodoMutate(updatedTodo);
-
-    // if (!isSuccessEditTodo) {
-    //   /// ?????
-    //   navigate("/todos");
-    // }
-    console.log("투두 수정");
   };
 
   return (

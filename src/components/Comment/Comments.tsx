@@ -14,7 +14,6 @@ export default function Comments({ todoId, userId }: CommentsProps) {
 
   const onCreateComment = (newComment: Omit<Comment, "id">) => {
     createComment(newComment);
-    console.log("코멘트 추가");
   };
 
   return (

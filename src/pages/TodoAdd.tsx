@@ -7,7 +7,6 @@ export default function TodoAdd() {
 
   const onCreateTodo = (newTodo: Omit<Todo, "id">) => {
     createTodo(newTodo);
-    console.log("투두 추가");
   };
 
   return (
