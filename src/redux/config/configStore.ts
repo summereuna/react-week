@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import todosSlice from "@redux/slices/todosSlice";
 import authSlice from "@redux/slices/authSlice";
+import alertSlice from "@redux/slices/alertSlice";
 
 export const store = configureStore({
   reducer: {
-    // todos: todosSlice,
     auth: authSlice,
+    alert: alertSlice,
   },
 });
 

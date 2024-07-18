@@ -2,30 +2,29 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { authLogin } from "@/api/auth";
-import { useAppDispatch } from "@/hooks/rtkHooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/rtkHooks";
 import { login } from "@redux/slices/authSlice";
 import Form from "@components/Form";
-import useModal from "@/hooks/useModal";
-import ModalPortal from "@components/Modal/ModalPortal";
-import ModalLayout from "@components/Modal/ModalLayout";
-import ModalAlert from "@components/Modal/ModalAlert";
 import axios from "axios";
 import { setCookie } from "@/utils/cookie";
+import { clearAlert, setAlert } from "@redux/slices/alertSlice";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isVisible, openModal, closeModal } = useModal();
-  const [alertContent, setAlertContent] = useState("");
+  const alertMessage = useAppSelector((state) => state.alert["loginForm"]);
 
   const [loginUser, setLoginUser] = useState({ ID: "", PASSWORD: "" });
 
   const changeLoginUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (alertMessage) {
+      dispatch(clearAlert("loginForm"));
+    }
+
     const { name, value } = e.target;
     setLoginUser({ ...loginUser, [name]: value });
   };
 
-  // const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationFn: authLogin,
     onSuccess: ({ userId, avatar, nickname, accessToken }) => {
@@ -54,44 +53,35 @@ const Login = () => {
       if (axios.isAxiosError(error) && error.response) {
         errorMsg = `${error.response.data.message}`;
       }
-      setAlertContent(errorMsg);
-      openModal();
+
+      dispatch(
+        setAlert({
+          formId: "loginForm",
+          message: errorMsg,
+        })
+      );
     },
   });
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    try {
-      const newLoginUser = {
-        id: loginUser.ID,
-        password: loginUser.PASSWORD,
-      };
-      mutate(newLoginUser);
-    } catch (error) {
-      setAlertContent("오류가 발생했습니다.\n로그인을 다시 시도해 주세요.");
-      openModal();
-    }
+    const newLoginUser = {
+      id: loginUser.ID,
+      password: loginUser.PASSWORD,
+    };
+    mutate(newLoginUser);
   };
 
   return (
-    <>
-      <Form
-        onChange={changeLoginUser}
-        onSubmit={handleSubmit}
-        id={loginUser.ID}
-        pw={loginUser.PASSWORD}
-        isRegister={false}
-        disabled={isPending}
-      />
-
-      {isVisible && (
-        <ModalPortal>
-          <ModalLayout onClose={closeModal}>
-            <ModalAlert onClose={closeModal} content={alertContent} />
-          </ModalLayout>
-        </ModalPortal>
-      )}
-    </>
+    <Form
+      onChange={changeLoginUser}
+      onSubmit={handleSubmit}
+      id={loginUser.ID}
+      pw={loginUser.PASSWORD}
+      isRegister={false}
+      disabled={isPending}
+      alertMessage={alertMessage}
+    />
   );
 };
 
