@@ -1,14 +1,16 @@
 import { editTodo } from "@/api/todos";
 // import { Todo } from "@/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const useEditTodo = () => {
+  const navigate = useNavigate();
+
   const queryClient = useQueryClient();
 
   const {
     mutate: editTodoMutate,
     isPending: isPendingEditTodo,
-    isSuccess: isSuccessEditTodo,
     isError: isErrorEditTodo,
   } = useMutation({
     mutationFn: editTodo,
@@ -17,13 +19,13 @@ const useEditTodo = () => {
     onSuccess: (_, todo) => {
       queryClient.invalidateQueries({ queryKey: ["todos"] }); //전체 투두 리스트
       queryClient.invalidateQueries({ queryKey: ["todo", todo.id] }); // 상세 페이지에서 겟하는 투두 아이디에 해당하는 투두
+      navigate(`/todos/${todo.id}`);
     },
   });
 
   return {
     editTodoMutate,
     isPendingEditTodo,
-    isSuccessEditTodo,
     isErrorEditTodo,
   };
 };
