@@ -116,7 +116,7 @@ export default function TodoForm({
             />
           </S.InputContainer>
           {isError && (
-            <AlertText>{"오류가 발생 했습니다. 다시 시도해 주세요!"}</AlertText>
+            <AlertText>{"오류가 발생했습니다. 다시 시도해 주세요!"}</AlertText>
           )}
           <S.ButtonWrapper>
             <Button type="submit" buttonTheme="btnAdd" disabled={isPending}>

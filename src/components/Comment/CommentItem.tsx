@@ -1,11 +1,9 @@
-import { useAppDispatch, useAppSelector } from "@/hooks/rtkHooks";
 import useEditComment from "@/hooks/useEditComment";
 import useUser from "@/hooks/useUser";
+import { Comment } from "@/types";
 import CommentForm from "@components/Comment/CommentForm";
 import EditIcon from "@components/EditIcon";
-import { clearAlert, setAlert } from "@redux/slices/alertSlice";
 import * as S from "@styles/components/comment/commentItem.style";
-import { useEffect, useState } from "react";
 
 interface CommentItemProps {
   commentId: string;
@@ -26,61 +24,10 @@ export default function CommentItem({
   onEditEnd,
 }: CommentItemProps) {
   const { id: myId } = useUser();
-  const dispatch = useAppDispatch();
-  const alertMessage = useAppSelector(
-    (state) => state.alert["editCommentForm"]
-  );
+  const { editMutate, isPending, isError } = useEditComment();
 
-  //패치하는 로직 여기서 구현
-  const { editMutate } = useEditComment();
-
-  const [updatedComment, setUpdatedComment] = useState(
-    isEditing ? comment : ""
-  );
-
-  useEffect(() => {
-    if (isEditing) {
-      setUpdatedComment(comment);
-    }
-  }, [isEditing, comment]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (alertMessage) {
-      dispatch(clearAlert("editCommentForm"));
-    }
-
-    setUpdatedComment(e.target.value);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!updatedComment.trim()) {
-      dispatch(
-        setAlert({
-          formId: "editCommentForm",
-          message: "댓글을 1글자 이상 적어 주세요.",
-        })
-      );
-      return;
-    }
-
-    const newUpdatedComment = {
-      id: commentId,
-      userId,
-      todoId,
-      comment: updatedComment,
-    };
-
-    //에디팅 중인 경우, 폼에서 새로 작성한 댓글 비동기 통신 보내기
-    if (isEditing) {
-      editMutate(newUpdatedComment);
-    }
-
-    //그러고 나서 에디팅 종료 함수 실행
-    onEditEnd();
-
-    setUpdatedComment("");
+  const onEditComment = (updatedComment: Comment) => {
+    editMutate(updatedComment);
   };
 
   return (
@@ -103,13 +50,16 @@ export default function CommentItem({
       {isEditing && (
         <S.CommentContainer>
           <CommentForm
-            onChange={handleChange}
-            onSubmit={handleSubmit}
-            value={updatedComment}
             userId={userId}
+            todoId={todoId}
+            commentId={commentId}
+            preComment={comment}
+            formId={"editCommentForm"}
+            onEditComment={onEditComment}
             isEditing={isEditing}
             onEditEnd={onEditEnd}
-            alertMessage={alertMessage}
+            isPending={isPending}
+            isError={isError}
           />
         </S.CommentContainer>
       )}

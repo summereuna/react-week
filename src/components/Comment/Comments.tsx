@@ -1,11 +1,8 @@
-import { useAppDispatch, useAppSelector } from "@/hooks/rtkHooks";
 import useCreateComment from "@/hooks/useCreateComment";
 import { Comment } from "@/types";
 import CommentForm from "@components/Comment/CommentForm";
 import CommentList from "@components/Comment/CommentList";
-import { clearAlert, setAlert } from "@redux/slices/alertSlice";
 import * as S from "@styles/components/comment/comments.style";
-import { useState } from "react";
 
 interface CommentsProps {
   todoId: string;
@@ -13,43 +10,11 @@ interface CommentsProps {
 }
 
 export default function Comments({ todoId, userId }: CommentsProps) {
-  const dispatch = useAppDispatch();
-  const alertMessage = useAppSelector((state) => state.alert["commentForm"]);
+  const { createComment, isPending, isError } = useCreateComment();
 
-  const { createComment } = useCreateComment();
-
-  const [comment, setComment] = useState("");
-
-  const changeNewComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (alertMessage) {
-      dispatch(clearAlert("commentForm"));
-    }
-
-    setComment(e.target.value);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!comment.trim()) {
-      dispatch(
-        setAlert({
-          formId: "commentForm",
-          message: "댓글을 1글자 이상 적어 주세요.",
-        })
-      );
-      return;
-    }
-
-    const newComment: Omit<Comment, "id"> = {
-      userId,
-      todoId,
-      comment,
-    };
-
+  const onCreateComment = (newComment: Omit<Comment, "id">) => {
     createComment(newComment);
-
-    setComment("");
+    console.log("코멘트 추가");
   };
 
   return (
@@ -61,11 +26,12 @@ export default function Comments({ todoId, userId }: CommentsProps) {
         </S.CommentListWrapper>
         {/*  */}
         <CommentForm
-          onChange={changeNewComment}
-          onSubmit={handleSubmit}
-          value={comment}
           userId={userId}
-          alertMessage={alertMessage}
+          todoId={todoId}
+          formId={"createCommentForm"}
+          isPending={isPending}
+          isError={isError}
+          onCreateComment={onCreateComment}
         />
       </S.CommentsContainer>
     </>
